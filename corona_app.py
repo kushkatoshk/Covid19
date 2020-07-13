@@ -22,27 +22,31 @@ import datetime as dt
 from datetime import datetime,timedelta
 from matplotlib.backends.backend_pdf import PdfPages
 import warnings
+import os
 register_matplotlib_converters()
-
 warnings.filterwarnings('ignore')
+os.chdir(r"C:\Users\Ankush Lakkanna\Covid19")
 
-with open(r"C:\Users\Ankush Lakkanna\INDIA_STATES.json") as f:
+with open(r"C:\Users\Ankush Lakkanna\Covid19\INDIA_STATES.json") as f:
     india = geojson.load(f)
 
 # @st.cache(persist=True)
 def load_data() :
-    data = pd.read_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv")
+    data = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\india_corona_data1.csv")
     return data
 
-st.markdown("<html style = background-color : black; color : white>", unsafe_allow_html=True)
+# with open(r"C:\Users\Ankush Lakkanna\Covid19\styles.css") as f:
+#     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+# st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
+# st.markdown("<head><link rel='stylesheet' href='styles.css'></head>", unsafe_allow_html=True)
 # COLOR = "black"
 # BACKGROUND_COLOR = "#fff"
-
+# local_css("styles.css")
 # state = pd.read_csv(r"C:\Users\Ankush Lakkanna\states.csv")
 df = load_data()
 last = df.shape[0]-1
-state_df = pd.read_csv(r"C:\Users\Ankush Lakkanna\state_data.csv")
-pop = pd.read_csv(r"C:\Users\Ankush Lakkanna\population.csv")
+state_df = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv")
+pop = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\population.csv")
 # daily = pd.read_csv(r"C:\Users\Ankush Lakkanna\daily_corona.csv")
 dates = state_df['Date'].unique().tolist()
 latest_date = dates[-1]
@@ -81,7 +85,7 @@ df1.index = pd.to_datetime(df1.index)
 
 activemodel = SARIMAX(df1, order=(0, 1, 1), seasonal_order=(0, 1, 1, 6))
 activemodel_fit = activemodel.fit(disp=False)
-activepred = [df.at[last,"Active Cases"]]
+activepred = []
 for i in range(1,14,2) :
     activepred.append(int(activemodel_fit.predict(len(df1)+i, len(df1)+i)))
 
@@ -92,9 +96,9 @@ df2.index = pd.to_datetime(df2.index)
 
 curedmodel = SARIMAX(df2, order=(1, 1, 1), seasonal_order=(1, 1, 1, 2))
 curedmodel_fit = curedmodel.fit(disp=False)
-curespred = [df.at[last,"Cured / Discharged"]]
+curedpred = []
 for i in range(0,7) :
-    curespred.append(int(curedmodel_fit.predict(len(df2)+i, len(df2)+i)))
+    curedpred.append(int(curedmodel_fit.predict(len(df2)+i, len(df2)+i)))
 
 df3 = df[['Date','Deaths']]
 df3['Date'] = pd.to_datetime(df3['Date'], format='%d-%m-%Y')
@@ -103,7 +107,7 @@ df3.index = pd.to_datetime(df3.index)
 
 deathsmodel = SARIMAX(df3, order=(1, 2, 1), seasonal_order=(1, 1, 1, 2))
 deathsmodel_fit = deathsmodel.fit(disp=False)
-deathspred = [df.at[last,"Deaths"]]
+deathspred = []
 for i in range(0,7) :
     deathspred.append(int(deathsmodel_fit.predict(len(df3)+i, len(df3)+i)))
 
@@ -121,15 +125,15 @@ if select == 'All States' :
     increase = df.at[last, 'Increase in Active Cases']
     recovery = (df.at[last, 'Cured / Discharged']/(df.at[last, 'Active Cases']+df.at[last, 'Cured / Discharged']+df.at[last, 'Deaths']))*100
 
-    tot = activepred[-1]+curespred[-1]+deathspred[-1]
+    tot = activepred[-1]+curedpred[-1]+deathspred[-1]
     total2 = (tot/spop)*1000000
     active2 = (activepred[-1]/spop)*1000000
-    cured2 = (curespred[-1]/spop)*1000000
+    cured2 = (curedpred[-1]/spop)*1000000
     deaths2 = (deathspred[-1]/spop)*1000000
     mortality2 = (deathspred[-1]/tot)*100
     rate2 = (((tot - df.at[last,'Total Cases'])/ df.at[last,'Total Cases'])*100)/7
     increase2 = activepred[-1]-activepred[-2]
-    recovery2 = (curespred[-1]/(tot))*100
+    recovery2 = (curedpred[-1]/(tot))*100
 
     st.sidebar.title("Current Numbers")
     st.sidebar.markdown("Confirmed : "+str(df.at[last, 'Total Cases']))
@@ -137,7 +141,6 @@ if select == 'All States' :
     st.sidebar.markdown("Cured \t: "+str(df.at[last, 'Cured / Discharged']))
     st.sidebar.markdown("Deaths\t: "+str(df.at[last, 'Deaths']))
     st.sidebar.markdown("Increase\t: "+str(increase))
-    st.sidebar.markdown(" ")
     # dark_theme = st.sidebar.checkbox("Dark Theme?", False)
     # if dark_theme:
     #     BACKGROUND_COLOR = "rgb(17,17,17)"
@@ -145,8 +148,6 @@ if select == 'All States' :
     # else :
     #     COLOR = "black"
     #     BACKGROUND_COLOR = "#fff"
-
-    st.sidebar.markdown(" ")
     st.sidebar.title("Important Dates ")
     st.sidebar.markdown("Lockdown 1 : 25-03-2020")
     st.sidebar.markdown("Lockdown 2 : 15-04-2020")
@@ -162,8 +163,12 @@ if select == 'All States' :
     # st.sidebar.markdown("Includes "+str(df.at[last, 'Total Cases'] - latest_data.Total.sum())+" cases to be assigned to states")
 
     datex = []
-    for i in range(0,8) :
-        datex.append(datetime(2020,7,3) + timedelta(days=i))
+    for i in range(1,8) :
+        dot = str(datetime.today() + timedelta(days=i))[:10]
+        dot = dot[8:]+'-'+dot[5:7]+'-'+dot[:4]
+        datex.append(dot)
+    dd = pd.DataFrame()
+    dd['Date'] = datex
 
     dfx = pd.DataFrame(columns=['Date','Active','Cured','Deaths'])
     dfx['Date'] = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
@@ -232,7 +237,7 @@ if select == 'All States' :
             txt = 'Forecasts (7 days from now)'
             txt1 = '1. Total Confirmed Cases : '+str(tot)
             txt2 = '2. Active Cases : '+str(activepred[-1])
-            txt3 = '3. Cured Cases : '+str(curespred[-1])
+            txt3 = '3. Cured Cases : '+str(curedpred[-1])
             txt4 = '4. Deaths : '+str(deathspred[-1])
             txt5 = '5. Daily Increase : '+str(increase2)
             txt6 = '6. Total Cases Per Million : '+str(round(total2,2))
@@ -368,36 +373,48 @@ if select == 'All States' :
 
     df['Date'] = pd.to_datetime(df['Date'], format='%d-%m-%Y')
     dfx['Date'] = pd.to_datetime(dfx['Date'], format='%d-%m-%Y')
+    dd['Date'] = pd.to_datetime(dd['Date'], format='%d-%m-%Y')
+
+    datelist = df['Date'].tolist()+[dd.at[0,'Date']]
+    activelist = df['Active Cases'].tolist()+[activepred[0]]
+    curedlist = df['Cured / Discharged'].tolist()+[curedpred[0]]
+    deathslist = df['Deaths'].tolist()+[deathspred[0]]
 
     fig1 = go.Figure()
     fig1.update_layout(title_text = 'Active Cases with Forecast')
     fig1.add_trace(
-        go.Scatter(x=df['Date'], y=df['Active Cases'],line=dict(color='firebrick', width=2), mode='lines', name='Recorded'))
+        go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig1.add_trace(
         go.Scatter(x=dfx['Date'], y=dfx['Active'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
     fig1.add_trace(
-        go.Scatter(x=datex, y=activepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast'))
+        go.Scatter(x=dd['Date'], y=activepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     st.write(fig1)
 
     fig2 = go.Figure()
     fig2.update_layout(title_text = 'Cured Cases with Forecast')
     fig2.add_trace(
-        go.Scatter(x=df['Date'], y=df['Cured / Discharged'],line=dict(color='royalblue', width=2), mode='lines', name='Recorded'))
+        go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig2.add_trace(
         go.Scatter(x=dfx['Date'], y=dfx['Cured'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
     fig2.add_trace(
-        go.Scatter(x=datex, y=curespred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast'))
+        go.Scatter(x=dd['Date'], y=curedpred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig2.update_layout(hovermode="x unified")
     st.write(fig2)
 
     fig3 = go.Figure()
     fig3.update_layout(title_text = 'Deaths with Forecast')
     fig3.add_trace(
-        go.Scatter(x=df['Date'], y=df['Deaths'],line=dict(color='#575965', width=2), mode='lines', name='Recorded'))
+        go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig3.add_trace(
         go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='royalblue', width=2), mode='markers', name='Important Dates'))
     fig3.add_trace(
-        go.Scatter(x=datex, y=deathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast'))
+        go.Scatter(x=dd['Date'], y=deathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     st.write(fig3)
 
     st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
@@ -452,8 +469,6 @@ else :
     st.sidebar.markdown("Cured \t: "+str(selected_df.at[last,'Cured']))
     st.sidebar.markdown("Deaths\t: "+str(selected_df.at[last,'Deaths']))
     st.sidebar.markdown("Increase\t: "+str(increase))
-    st.sidebar.markdown(" ")
-    st.sidebar.markdown(" ")
     st.sidebar.title("Important Dates ")
     st.sidebar.markdown("Lockdown 1 : 25-03-2020")
     st.sidebar.markdown("Lockdown 2 : 15-04-2020")
@@ -474,7 +489,7 @@ else :
 
     sactivemodel = SARIMAX(sdf1, order=(0, 1, 1), seasonal_order=(0, 1, 1, 10))
     sactivemodel_fit = sactivemodel.fit(disp=False)
-    sactivepred = [selected_df.at[last,"Active"]]
+    sactivepred = []
     for i in range(0,7) :
         sactivepred.append(int(sactivemodel_fit.predict(len(sdf1)+i, len(sdf1)+i)))
 
@@ -485,9 +500,9 @@ else :
 
     scuredmodel = SARIMAX(sdf2, order=(1, 1, 1), seasonal_order=(1, 1, 1, 2))
     scuredmodel_fit = scuredmodel.fit(disp=False)
-    scurespred = [selected_df.at[last,"Cured"]]
+    scuredpred = []
     for i in range(0,7) :
-        scurespred.append(int(scuredmodel_fit.predict(len(sdf2)+i, len(sdf2)+i)))
+        scuredpred.append(int(scuredmodel_fit.predict(len(sdf2)+i, len(sdf2)+i)))
 
     sdf3 = selected_df[['Date','Deaths']]
     sdf3['Date'] = pd.to_datetime(sdf3['Date'], format='%d-%m-%Y')
@@ -496,23 +511,27 @@ else :
 
     sdeathsmodel = SARIMAX(sdf3, order=(1, 2, 1), seasonal_order=(1, 1, 1, 2), initialization='approximate_diffuse')
     sdeathsmodel_fit = sdeathsmodel.fit(disp=False)
-    sdeathspred = [selected_df.at[last,"Deaths"]]
+    sdeathspred = []
     for i in range(0,7) :
         sdeathspred.append(int(sdeathsmodel_fit.predict(len(sdf3)+i, len(sdf3)+i)))
 
     datex = []
-    for i in range(0,8) :
-        datex.append(datetime(2020,7,2) + timedelta(days=i))
+    for i in range(0,7) :
+        dot = str(datetime.today() + timedelta(days=i))[:10]
+        dot = dot[8:]+'-'+dot[5:7]+'-'+dot[:4]
+        datex.append(dot)
+    dd = pd.DataFrame()
+    dd['Date'] = datex
 
-    tot = activepred[-1]+curespred[-1]+deathspred[-1]
+    tot = activepred[-1]+curedpred[-1]+deathspred[-1]
     total2 = (tot/spop)*1000000
     active2 = (activepred[-1]/spop)*1000000
-    cured2 = (curespred[-1]/spop)*1000000
+    cured2 = (curedpred[-1]/spop)*1000000
     deaths2 = (deathspred[-1]/spop)*1000000
     mortality2 = (deathspred[-1]/tot)*100
     rate2 = (((tot - df.at[last,'Total Cases'])/ df.at[last,'Total Cases'])*100)/7
     increase2 = activepred[-1]-activepred[-2]
-    recovery2 = (curespred[-1]/(tot))*100
+    recovery2 = (curedpred[-1]/(tot))*100
 
     dfx = pd.DataFrame(columns=['Date','Active','Cured','Deaths'])
     dfx['Date'] = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
@@ -581,7 +600,7 @@ else :
             txt = 'Forecasts (7 days from now)'
             txt1 = '1. Total Confirmed Cases : '+str(tot)
             txt2 = '2. Active Cases : '+str(activepred[-1])
-            txt3 = '3. Cured Cases : '+str(curespred[-1])
+            txt3 = '3. Cured Cases : '+str(curedpred[-1])
             txt4 = '4. Deaths : '+str(deathspred[-1])
             txt5 = '5. Daily Increase : '+str(increase2)
             txt6 = '6. Total Cases Per Million : '+str(round(total2,2))
@@ -721,35 +740,47 @@ else :
 
     selected_df['Date'] = pd.to_datetime(selected_df['Date'], format='%d-%m-%Y')
     dfx['Date'] = pd.to_datetime(dfx['Date'], format='%d-%m-%Y')
+    dd['Date'] = pd.to_datetime(dd['Date'], format='%d-%m-%Y')
+
+    datelist = selected_df['Date'].tolist()+[dd.at[0,'Date']]
+    activelist = selected_df['Active'].astype('int64', copy=False).tolist()+[sactivepred[0]]
+    curedlist = selected_df['Cured'].tolist()+[scuredpred[0]]
+    deathslist = selected_df['Deaths'].tolist()+[sdeathspred[0]]
 
     fig1 = go.Figure()
     fig1.update_layout(title_text = 'Active Cases')
     fig1.add_trace(
-        go.Scatter(x=selected_df['Date'], y=selected_df['Active'],line=dict(color='firebrick', width=2), mode='lines', name='Recorded'))
+        go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig1.add_trace(
         go.Scatter(x=dfx['Date'], y=dfx['Active'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
     fig1.add_trace(
-        go.Scatter(x=datex, y=sactivepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast'))
+        go.Scatter(x=dd['Date'], y=sactivepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     st.write(fig1)
 
     fig2 = go.Figure()
     fig2.update_layout(title_text = 'Cured Cases')
     fig2.add_trace(
-        go.Scatter(x=selected_df['Date'], y=selected_df['Cured'],line=dict(color='royalblue', width=2), mode='lines', name='Recorded'))
+        go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig2.add_trace(
         go.Scatter(x=dfx['Date'], y=dfx['Cured'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
     fig2.add_trace(
-        go.Scatter(x=datex, y=scurespred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast'))
+        go.Scatter(x=dd['Date'], y=scuredpred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     st.write(fig2)
 
     fig3 = go.Figure()
     fig3.update_layout(title_text = 'Deaths')
     fig3.add_trace(
-        go.Scatter(x=selected_df['Date'], y=selected_df['Deaths'],line=dict(color='#575965', width=2), mode='lines', name='Recorded'))
+        go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig3.add_trace(
         go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
     fig3.add_trace(
-        go.Scatter(x=datex, y=sdeathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast'))
+        go.Scatter(x=dd['Date'], y=sdeathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     st.write(fig3)
 
     st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)

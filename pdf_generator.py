@@ -5,6 +5,7 @@ import pydeck as pdk
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import os
 import json
 import time
 import geojson
@@ -26,12 +27,13 @@ register_matplotlib_converters()
 
 warnings.filterwarnings('ignore')
 
-with open(r"C:\Users\Ankush Lakkanna\INDIA_STATES.json") as f:
+os.chdir(r"C:\Users\Ankush Lakkanna\Covid19")
+with open(r"C:\Users\Ankush Lakkanna\Covid19\INDIA_STATES.json") as f:
     india = geojson.load(f)
 
 # @st.cache(persist=True)
 def load_data() :
-    data = pd.read_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv")
+    data = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\india_corona_data1.csv")
     return data
 
 st.markdown("<html style = background-color : black; color : white>", unsafe_allow_html=True)
@@ -41,8 +43,8 @@ select = 'All States'
 # state = pd.read_csv(r"C:\Users\Ankush Lakkanna\states.csv")
 df = load_data()
 last = df.shape[0]-1
-state_df = pd.read_csv(r"C:\Users\Ankush Lakkanna\state_data.csv")
-pop = pd.read_csv(r"C:\Users\Ankush Lakkanna\population.csv")
+state_df = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv")
+pop = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\population.csv")
 
 df1 = df[['Date','Active Cases']]
 df1['Date'] = pd.to_datetime(df1['Date'], format='%d-%m-%Y')
