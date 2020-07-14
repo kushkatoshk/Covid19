@@ -192,7 +192,8 @@ if select == 'All States' :
 
     st.markdown("##   State Data ")
     state1 = latest_data.sort_values(by=['Active'],ascending=False).reset_index(drop=True)
-    st.table(state1)
+    inds = pd.Series(range(1,36))
+    st.table(state1.set_index(inds))
 
     st.markdown("## Helpful Videos")
     st.markdown("### Covid-19 explained")
@@ -346,7 +347,8 @@ else :
 
     st.markdown("##   State Data ")
     state1 = latest_data.sort_values(by=['Active'],ascending=False).reset_index(drop=True)
-    st.table(state1)
+    inds = pd.Series(range(1,36))
+    st.table(state1.set_index(inds))
 
     st.markdown("## Helpful Videos")
     st.markdown("### Covid-19 explained")
