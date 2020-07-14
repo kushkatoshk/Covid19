@@ -25,7 +25,7 @@ import warnings
 import os
 register_matplotlib_converters()
 warnings.filterwarnings('ignore')
-os.chdir(r"C:\Users\Ankush Lakkanna\Covid19")
+# os.chdir(r"C:\Users\Ankush Lakkanna\Covid19")
 
 with open(r"C:\Users\Ankush Lakkanna\Covid19\INDIA_STATES.json") as f:
     india = geojson.load(f)
