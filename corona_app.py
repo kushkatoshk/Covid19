@@ -151,7 +151,8 @@ if select == 'All States' :
         go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
     fig1.add_trace(
-        go.Scatter(x=dfx['Date'], y=dfx['Active'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
+        go.Scatter(x=dfx['Date'], y=dfx['Active'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig1.add_trace(
         go.Scatter(x=dd['Date'], y=activepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
@@ -161,12 +162,13 @@ if select == 'All States' :
     fig2.update_layout(title_text = 'Cured Cases with Forecast')
     fig2.add_trace(
         go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Cured</b> : %{y:.0}'))
     fig2.add_trace(
-        go.Scatter(x=dfx['Date'], y=dfx['Cured'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
+        go.Scatter(x=dfx['Date'], y=dfx['Cured'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Cured</b> : %{y:.0}'))
     fig2.add_trace(
         go.Scatter(x=dd['Date'], y=curedpred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Cured</b> : %{y:.0}'))
     fig2.update_layout(hovermode="x unified")
     st.write(fig2)
 
@@ -174,12 +176,13 @@ if select == 'All States' :
     fig3.update_layout(title_text = 'Deaths with Forecast')
     fig3.add_trace(
         go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Deaths</b> : %{y:.0}'))
     fig3.add_trace(
-        go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='royalblue', width=2), mode='markers', name='Important Dates'))
+        go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='royalblue', width=2), mode='markers', name='Important Dates', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Deaths</b> : %{y:.0}'))
     fig3.add_trace(
         go.Scatter(x=dd['Date'], y=deathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Deaths</b> : %{y:.0}'))
     st.write(fig3)
 
     st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
@@ -307,7 +310,8 @@ else :
         go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
     fig1.add_trace(
-        go.Scatter(x=dfx['Date'], y=dfx['Active'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
+        go.Scatter(x=dfx['Date'], y=dfx['Active'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
     fig1.add_trace(
         go.Scatter(x=dd['Date'], y=sactivepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
@@ -317,24 +321,26 @@ else :
     fig2.update_layout(title_text = 'Cured Cases')
     fig2.add_trace(
         go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Cured</b> : %{y:.0}'))
     fig2.add_trace(
-        go.Scatter(x=dfx['Date'], y=dfx['Cured'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
+        go.Scatter(x=dfx['Date'], y=dfx['Cured'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Cured</b> : %{y:.0}'))
     fig2.add_trace(
         go.Scatter(x=dd['Date'], y=scuredpred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Cured</b> : %{y:.0}'))
     st.write(fig2)
 
     fig3 = go.Figure()
     fig3.update_layout(title_text = 'Deaths')
     fig3.add_trace(
         go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Deaths</b> : %{y:.0}'))
     fig3.add_trace(
-        go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='royalblue', width=2), mode='markers', name='Important Dates'))
+        go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='royalblue', width=2), mode='markers', name='Important Dates', hovertemplate ='<b>Date</b> : %{x}'+
+                                                                                                                            '<br><b>Deaths</b> : %{y:.0}'))
     fig3.add_trace(
         go.Scatter(x=dd['Date'], y=sdeathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
-                                                                                                                            '<br><b>Active</b> : %{y:.0}'))
+                                                                                                                            '<br><b>Deaths</b> : %{y:.0}'))
     st.write(fig3)
 
     st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
