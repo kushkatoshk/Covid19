@@ -34,7 +34,7 @@ with open(r"C:\Users\Ankush Lakkanna\Covid19\INDIA_STATES.json") as f:
 def load_data() :
     data = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\india_corona_data1.csv")
     return data
-
+#
 # with open(r"C:\Users\Ankush Lakkanna\Covid19\styles.css") as f:
 #     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 # st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
@@ -184,184 +184,11 @@ if select == 'All States' :
             dfx.at[j,'Deaths'] = df.at[i,'Deaths']
             j+=1
 
-    if st.button('Download'):
-        with PdfPages('India Report.pdf') as pdf:
-            firstPage = plt.figure(figsize=(11.69,8.27))
-            firstPage.clf()
-            txt = 'India Report'
-            txt1 = str(df.at[last,'Date'])
-            txt2 = 'Covid-19 India Dashboard'
-            firstPage.text(0.5,0.5,txt, transform=firstPage.transFigure, size=28, ha="center")
-            firstPage.text(0.5,0.4,txt1, transform=firstPage.transFigure, size=24, ha="center")
-            firstPage.text(0.99,0.001,txt2, transform=firstPage.transFigure, size=10, ha="center")
-            pdf.savefig()
-            plt.close()
 
-            secondPage = plt.figure(figsize=(11.69,8.27))
-            secondPage.clf()
-            txt = 'Statistics'
-            txt1 = '1. Total Confirmed Cases : '+str(df.at[last, 'Total Cases'])
-            txt2 = '2. Active Cases : '+str(df.at[last, 'Active Cases'])
-            txt3 = '3. Cured Cases : '+str(df.at[last, 'Cured / Discharged'])
-            txt4 = '4. Deaths : '+str(df.at[last, 'Deaths'])
-            txt5 = '5. Daily Increase : '+str(increase)
-            txt6 = '6. Total Cases Per Million : '+str(round(total1,2))
-            txt7 = '7. Active Cases Per Million : '+str(round(active1,2))
-            txt8 = '8. Cured Cases Per Million : '+str(round(cured1,2))
-            txt9 = '9. Deaths Per Million : '+str(round(deaths1,2))
-            txt10 = '10. Mortality Rate : '+str(round(mortality,2))
-            txt11 = '11. Growth Rate : '+str(round(rate,2))
-            txt12 = '12. Recovery Rate : '+str(round(recovery,2))
-            txt13 = 'Covid-19 India Dashboard'
-
-            secondPage.text(0.05,0.90,txt, transform=secondPage.transFigure, size=24, ha="left")
-            secondPage.text(0.05,0.85,txt1, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.80,txt2, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.75,txt3, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.70,txt4, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.65,txt5, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.60,txt6, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.55,txt7, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.50,txt8, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.45,txt9, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.40,txt10, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.35,txt11, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.30,txt12, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.99,0.001,txt13, transform=secondPage.transFigure, size=10, ha="right")
-
-            pdf.savefig()
-            plt.close()
-
-            thirdPage = plt.figure(figsize=(11.69,8.27))
-            thirdPage.clf()
-            txt = 'Forecasts (7 days from now)'
-            txt1 = '1. Total Confirmed Cases : '+str(tot)
-            txt2 = '2. Active Cases : '+str(activepred[-1])
-            txt3 = '3. Cured Cases : '+str(curedpred[-1])
-            txt4 = '4. Deaths : '+str(deathspred[-1])
-            txt5 = '5. Daily Increase : '+str(increase2)
-            txt6 = '6. Total Cases Per Million : '+str(round(total2,2))
-            txt7 = '7. Active Cases Per Million : '+str(round(active2,2))
-            txt8 = '8. Cured Cases Per Million : '+str(round(cured2,2))
-            txt9 = '9. Deaths Per Million : '+str(round(deaths2,2))
-            txt10 = '10. Mortality Rate : '+str(round(mortality2,2))
-            txt11 = '11. Growth Rate : '+str(round(rate2,2))
-            txt12 = '12. Recovery Rate : '+str(round(recovery2,2))
-            txt13 = 'Covid-19 India Dashboard'
-
-            thirdPage.text(0.05,0.90,txt, transform=thirdPage.transFigure, size=24, ha="left")
-            thirdPage.text(0.05,0.85,txt1, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.80,txt2, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.75,txt3, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.70,txt4, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.65,txt5, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.60,txt6, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.55,txt7, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.50,txt8, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.45,txt9, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.40,txt10, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.35,txt11, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.30,txt12, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.99,0.001,txt13, transform=thirdPage.transFigure, size=10, ha="right")
-
-            pdf.savefig()
-            plt.close()
-
-            fourthPage = plt.figure(figsize=(11.69,8.27))
-            fourthPage.clf()
-            txt = 'Details to note before viewing graphs'
-            txt1 = '1. All graphs are from 1st March, 2020 till date'
-            txt2 = '2. The Pie Chart is of the data on '+str(df.at[last,'Date'])
-            txt3 = '3. The points marked on the graphs are in order of important dates'
-            txt4 = '4. All the data used is the Public data from the MOHFW India'
-            txt5 = '5. The dates are the national lockdown dates'
-            txt6 = 'Important Dates '
-            txt7 = 'Lockdown 1 : 25-03-2020'
-            txt8 = 'Lockdown 2 : 15-04-2020'
-            txt9 = 'Lockdown 3 : 04-05-2020'
-            txt10 = 'Lockdown 4 : 18-05-2020'
-            txt11 = 'Unlock 1 : 01-06-2020'
-            txt12 = 'Covid-19 India Dashboard'
-
-            fourthPage.text(0.05,0.90,txt, transform=fourthPage.transFigure, size=24, ha="left")
-            fourthPage.text(0.05,0.85,txt1, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.80,txt2, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.75,txt3, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.70,txt4, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.65,txt5, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.55,txt6, transform=fourthPage.transFigure, size=24, ha="left")
-            fourthPage.text(0.05,0.50,txt7, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.45,txt8, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.40,txt9, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.35,txt10, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.30,txt11, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.99,0.001,txt12, transform=fourthPage.transFigure, size=10, ha="right")
-
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            act = 100 * df.at[last,'Active Cases']/(df.at[last,'Active Cases']+df.at[last,'Cured / Discharged']+df.at[last,'Deaths'])
-            cur = 100 * df.at[last,'Cured / Discharged']/(df.at[last,'Active Cases']+df.at[last,'Cured / Discharged']+df.at[last,'Deaths'])
-            dea = 100 * df.at[last,'Deaths']/(df.at[last,'Active Cases']+df.at[last,'Cured / Discharged']+df.at[last,'Deaths'])
-            labels = ['Active '+str(round(act,2))+'%','Cured '+str(round(cur,2))+'%','Deaths '+str(round(dea,2))+'%']
-            values = [  df.at[last,'Active Cases'], df.at[last,'Cured / Discharged'], df.at[last,'Deaths']]
-            colors = [ '#EF5939', 'royalblue', '#C4C7CE']
-            plt.pie(values, radius=1, colors=colors,
-                   wedgeprops=dict(width=0.7), labels = labels)
-            txt = 'Current State of India : '+str(df.at[last,'Active Cases']+df.at[last,'Cured / Discharged']+df.at[last,'Deaths'])+" Cases"
-            txt1 = 'The Pie chart shows the distribution of cases in India'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            plt.plot(df['Active Cases'],color='firebrick')
-            plt.plot([24,45,64,78,92], dfx['Active'], '.', color='#575965')
-            plt.xlabel('Days from 1st March')
-            plt.ylabel('Active Cases')
-            plt.grid(True)
-            txt = 'Active Cases'
-            txt1 = 'The graph shows the change in Active Cases from 1st March till date'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            plt.plot(df['Cured / Discharged'],color='royalblue')
-            plt.plot([24,45,64,78,92], dfx['Cured'], '.', color='#575965')
-            plt.xlabel('Days from 1st March')
-            plt.ylabel('Cured Cases')
-            plt.grid(True)
-            txt = 'Cured Cases'
-            txt1 = 'The graph shows the change in Cured Cases from 1st March till date'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            plt.plot(df['Deaths'],color='#575965')
-            plt.plot([24,45,64,78,92], dfx['Deaths'], '.', color='royalblue')
-            plt.xlabel('Days from 1st March')
-            plt.ylabel('Deaths')
-            plt.grid(True)
-            txt = 'Deaths'
-            txt1 = 'The graph shows the change in Deaths from 1st March till date'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            pdf.savefig()
-            plt.close()
+    # if st.button('Download'):
+    download_text = select.replace(' ','%20')+'%20Report.pdf'
+    st.markdown("<a href= 'https://github.com/kushkatoshk/Covid19/raw/master/India%20Report.pdf' class= 'a button1' download>Download Report</a>", unsafe_allow_html=True)
+# https://github.com/kushkatoshk/Covid19/raw/master/India%20Report.pdf
 
     labels = ['Deaths','Active','Cured']
     colors = ['#C4C7CE', '#EF5939', 'royalblue'] #'#264F73']
@@ -448,7 +275,11 @@ if select == 'All States' :
     Data Source : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
     """
         )
-
+    # st.markdown(
+    #         """
+    # Data Source : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
+    # """
+    #     )
 else :
 
     selected_df = state_df[state_df['State']==select].reset_index(drop=True)
@@ -547,187 +378,11 @@ else :
             dfx.at[j,'Deaths'] = selected_df.at[i,'Deaths']
             j+=1
 
-    if st.button('Download'):
-        with PdfPages(str(select)+' Report.pdf') as pdf:
-            firstPage = plt.figure(figsize=(11.69,8.27))
-            firstPage.clf()
-            txt = str(select)+' Report'
-            txt1 = str(df.at[df.shape[0]-1,'Date'])
-            txt2 = 'Covid-19 India Dashboard'
-            firstPage.text(0.5,0.5,txt, transform=firstPage.transFigure, size=28, ha="center")
-            firstPage.text(0.5,0.4,txt1, transform=firstPage.transFigure, size=24, ha="center")
-            firstPage.text(0.99,0.001,txt2, transform=firstPage.transFigure, size=10, ha="right")
-            pdf.savefig()
-            plt.close()
 
-            secondPage = plt.figure(figsize=(11.69,8.27))
-            secondPage.clf()
-            txt = 'Statistics'
-            txt1 = '1. Total Confirmed Cases : '+str(selected_df.at[last, 'Total'])
-            txt2 = '2. Active Cases : '+str(selected_df.at[last, 'Active'])
-            txt3 = '3. Cured Cases : '+str(selected_df.at[last, 'Cured'])
-            txt4 = '4. Deaths : '+str(selected_df.at[last, 'Deaths'])
-            txt5 = '5. Increase from yesterday : '+str(increase)
-            txt6 = '6. Total Cases Per Million : '+str(round(total1,2))
-            txt7 = '7. Active Cases Per Million : '+str(round(active1,2))
-            txt8 = '8. Cured Cases Per Million : '+str(round(cured1,2))
-            txt9 = '9. Deaths Per Million : '+str(round(deaths1,2))
-            txt10 = '10. Mortality Rate : '+str(round(mortality,2))
-            txt11 = '11. Growth Rate : '+str(round(rate,2))
-            txt12 = '12. Recovery Rate : '+str(round(recovery,2))
-            txt13 = 'Covid-19 India Dashboard'
+    download_text = select.replace(' ','%20')+'%20Report.pdf'
+    st.markdown("<a href= 'https://github.com/kushkatoshk/Covid19/raw/master/"+download_text+"' download>Download Report</a>", unsafe_allow_html=True)
 
-            secondPage.text(0.03,0.90,txt, transform=secondPage.transFigure, size=24, ha="left")
-            secondPage.text(0.05,0.85,txt1, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.80,txt2, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.75,txt3, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.70,txt4, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.65,txt5, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.60,txt6, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.55,txt7, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.50,txt8, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.45,txt9, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.40,txt10, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.35,txt11, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.05,0.30,txt12, transform=secondPage.transFigure, size=20, ha="left")
-            secondPage.text(0.99,0.001,txt13, transform=secondPage.transFigure, size=10, ha="right")
-
-            pdf.savefig()
-            plt.close()
-
-            thirdPage = plt.figure(figsize=(11.69,8.27))
-            thirdPage.clf()
-            txt = 'Forecasts (7 days from now)'
-            txt1 = '1. Total Confirmed Cases : '+str(tot)
-            txt2 = '2. Active Cases : '+str(activepred[-1])
-            txt3 = '3. Cured Cases : '+str(curedpred[-1])
-            txt4 = '4. Deaths : '+str(deathspred[-1])
-            txt5 = '5. Daily Increase : '+str(increase2)
-            txt6 = '6. Total Cases Per Million : '+str(round(total2,2))
-            txt7 = '7. Active Cases Per Million : '+str(round(active2,2))
-            txt8 = '8. Cured Cases Per Million : '+str(round(cured2,2))
-            txt9 = '9. Deaths Per Million : '+str(round(deaths2,2))
-            txt10 = '10. Mortality Rate : '+str(round(mortality2,2))
-            txt11 = '11. Growth Rate : '+str(round(rate2,2))
-            txt12 = '12. Recovery Rate : '+str(round(recovery2,2))
-            txt13 = 'Covid-19 India Dashboard'
-
-            thirdPage.text(0.05,0.90,txt, transform=thirdPage.transFigure, size=24, ha="left")
-            thirdPage.text(0.05,0.85,txt1, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.80,txt2, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.75,txt3, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.70,txt4, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.65,txt5, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.60,txt6, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.55,txt7, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.50,txt8, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.45,txt9, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.40,txt10, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.35,txt11, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.05,0.30,txt12, transform=thirdPage.transFigure, size=20, ha="left")
-            thirdPage.text(0.99,0.001,txt13, transform=thirdPage.transFigure, size=10, ha="right")
-
-            pdf.savefig()
-            plt.close()
-
-            fourthPage = plt.figure(figsize=(11.69,8.27))
-            fourthPage.clf()
-            txt = 'Details to note before viewing graphs'
-            txt1 = '1. All graphs are from 1st March, 2020 till date'
-            txt2 = '2. The Pie Chart is of the data on '+str(df.at[last,'Date'])
-            txt3 = '3. The points marked on the graphs are in order of important dates'
-            txt4 = '4. All the data used is the Public data from the MOHFW India'
-            txt5 = '5. The dates are the national lockdown dates'
-            txt6 = 'Important Dates '
-            txt7 = 'Lockdown 1 : 25-03-2020'
-            txt8 = 'Lockdown 2 : 15-04-2020'
-            txt9 = 'Lockdown 3 : 04-05-2020'
-            txt10 = 'Lockdown 4 : 18-05-2020'
-            txt11 = 'Unlock 1 : 01-06-2020'
-            txt12 = 'Covid-19 India Dashboard'
-
-            fourthPage.text(0.05,0.90,txt, transform=fourthPage.transFigure, size=24, ha="left")
-            fourthPage.text(0.05,0.85,txt1, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.80,txt2, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.75,txt3, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.70,txt4, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.65,txt5, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.55,txt6, transform=fourthPage.transFigure, size=24, ha="left")
-            fourthPage.text(0.05,0.50,txt7, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.45,txt8, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.40,txt9, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.35,txt10, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.05,0.30,txt11, transform=fourthPage.transFigure, size=20, ha="left")
-            fourthPage.text(0.99,0.001,txt12, transform=fourthPage.transFigure, size=10, ha="right")
-
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            act = 100 * selected_df.at[last,'Active']/(selected_df.at[last,'Active']+selected_df.at[last,'Cured']+selected_df.at[last,'Deaths'])
-            cur = 100 * selected_df.at[last,'Cured']/(selected_df.at[last,'Active']+selected_df.at[last,'Cured']+selected_df.at[last,'Deaths'])
-            dea = 100 * selected_df.at[last,'Deaths']/(selected_df.at[last,'Active']+selected_df.at[last,'Cured']+selected_df.at[last,'Deaths'])
-            labels = ['Active '+str(round(act,2))+'%','Cured '+str(round(cur,2))+'%','Deaths '+str(round(dea,2))+'%']
-            labels = ['Deaths','Active','Cured']
-            values = [selected_df.at[last,'Deaths'], selected_df.at[last,'Active'], selected_df.at[last,'Cured']]
-            # colors = ['mediumseagreen','firebrick','royalblue']
-            colors = ['#C4C7CE', '#EF5939', 'royalblue']
-            plt.pie(values, radius=1, colors=colors,
-                   wedgeprops=dict(width=0.7), labels = labels)
-            txt = 'Current State of India'
-            txt1 = 'The Pie chart shows the distribution of cases in India'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            plt.plot(selected_df['Active'],color='firebrick')
-            plt.plot([24,45,64,78,92], dfx['Active'], '.', color='#575965')
-            plt.xlabel('Days from 1st March')
-            plt.ylabel('Active Cases')
-            plt.grid(True)
-            txt = 'Active Cases'
-            txt1 = 'The graph shows the change in Active Cases from 1st March till date'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            plt.plot(selected_df['Cured'],color='royalblue')
-            plt.plot([24,45,64,78,92], dfx['Cured'], '.', color='#575965')
-            plt.xlabel('Days from 1st March')
-            plt.ylabel('Cured Cases')
-            plt.grid(True)
-            txt = 'Cured Cases'
-            txt1 = 'The graph shows the change in Cured Cases from 1st March till date'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            pdf.savefig()
-            plt.close()
-
-            fig = plt.figure(figsize=(11.69,8.27))
-            plt.plot(selected_df['Deaths'],color='#575965')
-            plt.plot([24,45,64,78,92], dfx['Deaths'], '.', color='royalblue')
-            plt.xlabel('Days from 1st March')
-            plt.ylabel('Deaths')
-            plt.grid(True)
-            txt = 'Deaths'
-            txt1 = 'The graph shows the change in Deaths from 1st March till date'
-            txt2 = 'Covid-19 India Dashboard'
-            plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
-            plt.text(0.99,0.001,txt2, transform=fig.transFigure, size=10, ha="right")
-            plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
-            pdf.savefig()
-            plt.close()
-
+        # https://github.com/kushkatoshk/Covid19/raw/master/Andaman%20and%20Nicobar%20Islands%20Report.pdf
 
     labels = ['Deaths','Active','Cured']
     values = [selected_df.at[last,'Deaths'], selected_df.at[last,'Active'], selected_df.at[last,'Cured']]

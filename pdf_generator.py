@@ -143,9 +143,9 @@ with PdfPages('India Report.pdf') as pdf:
     txt7 = '7. Active Cases Per Million : '+str(round(active1,2))
     txt8 = '8. Cured Cases Per Million : '+str(round(cured1,2))
     txt9 = '9. Deaths Per Million : '+str(round(deaths1,2))
-    txt10 = '10. Mortality Rate : '+str(round(mortality,2))
-    txt11 = '11. Growth Rate : '+str(round(rate,2))
-    txt12 = '12. Recovery Rate : '+str(round(recovery,2))
+    txt10 = '10. Mortality Rate : '+str(round(mortality,2))+'%'
+    txt11 = '11. Growth Rate : '+str(round(rate,2))+'%'
+    txt12 = '12. Recovery Rate : '+str(round(recovery,2))+'%'
     txt13 = 'Covid-19 India Dashboard'
 
     secondPage.text(0.05,0.90,txt, transform=secondPage.transFigure, size=24, ha="left")
@@ -178,9 +178,9 @@ with PdfPages('India Report.pdf') as pdf:
     txt7 = '7. Active Cases Per Million : '+str(round(active2,2))
     txt8 = '8. Cured Cases Per Million : '+str(round(cured2,2))
     txt9 = '9. Deaths Per Million : '+str(round(deaths2,2))
-    txt10 = '10. Mortality Rate : '+str(round(mortality2,2))
-    txt11 = '11. Growth Rate : '+str(round(rate2,2))
-    txt12 = '12. Recovery Rate : '+str(round(recovery2,2))
+    txt10 = '10. Mortality Rate : '+str(round(mortality2,2))+'%'
+    txt11 = '11. Growth Rate : '+str(round(rate2,2))+'%'
+    txt12 = '12. Recovery Rate : '+str(round(recovery2,2))+'%'
     txt13 = 'Covid-19 India Dashboard'
 
     thirdPage.text(0.05,0.90,txt, transform=thirdPage.transFigure, size=24, ha="left")
@@ -205,7 +205,7 @@ with PdfPages('India Report.pdf') as pdf:
     fourthPage.clf()
     txt = 'Details to note before viewing graphs'
     txt1 = '1. All graphs are from 1st March, 2020 till date'
-    txt2 = '2. The Pie Chart is of the data on '+str(df.at[last,'Date'])
+    txt2 = '2. Any steep slope upwards is a sign that a lockdown is required'
     txt3 = '3. The points marked on the graphs are in order of important dates'
     txt4 = '4. All the data used is the Public data from the MOHFW India'
     txt5 = '5. The dates are the national lockdown dates'
@@ -258,7 +258,7 @@ with PdfPages('India Report.pdf') as pdf:
     plt.xlabel('Days from 1st March')
     plt.ylabel('Active Cases')
     plt.grid(True)
-    txt = 'Active Cases'
+    txt = 'Active Cases : '+str(df.at[last,'Active Cases'])+" Cases"
     txt1 = 'The graph shows the change in Active Cases from 1st March till date'
     txt2 = 'Covid-19 India Dashboard'
     plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
@@ -273,7 +273,7 @@ with PdfPages('India Report.pdf') as pdf:
     plt.xlabel('Days from 1st March')
     plt.ylabel('Cured Cases')
     plt.grid(True)
-    txt = 'Cured Cases'
+    txt = 'Cured Cases : '+str(df.at[last,'Cured / Discharged'])+" Cases"
     txt1 = 'The graph shows the change in Cured Cases from 1st March till date'
     txt2 = 'Covid-19 India Dashboard'
     plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
@@ -288,7 +288,7 @@ with PdfPages('India Report.pdf') as pdf:
     plt.xlabel('Days from 1st March')
     plt.ylabel('Deaths')
     plt.grid(True)
-    txt = 'Deaths'
+    txt = 'Deaths : '+str(df.at[last,'Deaths'])+" Cases"
     txt1 = 'The graph shows the change in Deaths from 1st March till date'
     txt2 = 'Covid-19 India Dashboard'
     plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
@@ -349,30 +349,30 @@ for select in statelist :
     for i in range(0,8) :
         datex.append(datetime(2020,7,2) + timedelta(days=i))
 
-    tot = activepred[-1]+curespred[-1]+deathspred[-1]
+    tot = sactivepred[-1]+scurespred[-1]+sdeathspred[-1]
     total2 = (tot/spop)*1000000
-    active2 = (activepred[-1]/spop)*1000000
-    cured2 = (curespred[-1]/spop)*1000000
-    deaths2 = (deathspred[-1]/spop)*1000000
-    mortality2 = (deathspred[-1]/tot)*100
-    rate2 = (((tot - df.at[last,'Total Cases'])/ df.at[last,'Total Cases'])*100)/7
-    increase2 = activepred[-1]-activepred[-2]
-    recovery2 = (curespred[-1]/(tot))*100
+    active2 = (sactivepred[-1]/spop)*1000000
+    cured2 = (scurespred[-1]/spop)*1000000
+    deaths2 = (sdeathspred[-1]/spop)*1000000
+    mortality2 = (sdeathspred[-1]/tot)*100
+    rate2 = (((tot - selected_df.at[last,'Total'])/ selected_df.at[last,'Total'])*100)/7
+    increase2 = sactivepred[-1]-sactivepred[-2]
+    recovery2 = (scurespred[-1]/(tot))*100
 
     dfx = pd.DataFrame(columns=['Date','Active','Cured','Deaths'])
+    pos = [24,45,64,78,92]
     dfx['Date'] = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
     idate = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
     iactive = []
     icured = []
     ideaths = []
     j=0
-    for i in range(len(selected_df['Date'])) :
-        if selected_df.at[i,'Date'] in idate :
+    for i in pos :
+        if selected_df.shape[0] > i :
             dfx.at[j,'Active'] = selected_df.at[i,'Active']
             dfx.at[j,'Cured'] = selected_df.at[i,'Cured']
             dfx.at[j,'Deaths'] = selected_df.at[i,'Deaths']
             j+=1
-
 
     with PdfPages(str(select)+' Report.pdf') as pdf:
         firstPage = plt.figure(figsize=(11.69,8.27))
@@ -398,12 +398,12 @@ for select in statelist :
         txt7 = '7. Active Cases Per Million : '+str(round(active1,2))
         txt8 = '8. Cured Cases Per Million : '+str(round(cured1,2))
         txt9 = '9. Deaths Per Million : '+str(round(deaths1,2))
-        txt10 = '10. Mortality Rate : '+str(round(mortality,2))
-        txt11 = '11. Growth Rate : '+str(round(rate,2))
-        txt12 = '12. Recovery Rate : '+str(round(recovery,2))
+        txt10 = '10. Mortality Rate : '+str(round(mortality,2))+'%'
+        txt11 = '11. Growth Rate : '+str(round(rate,2))+'%'
+        txt12 = '12. Recovery Rate : '+str(round(recovery,2))+'%'
         txt13 = 'Covid-19 India Dashboard'
 
-        secondPage.text(0.03,0.90,txt, transform=secondPage.transFigure, size=24, ha="left")
+        secondPage.text(0.05,0.90,txt, transform=secondPage.transFigure, size=24, ha="left")
         secondPage.text(0.05,0.85,txt1, transform=secondPage.transFigure, size=20, ha="left")
         secondPage.text(0.05,0.80,txt2, transform=secondPage.transFigure, size=20, ha="left")
         secondPage.text(0.05,0.75,txt3, transform=secondPage.transFigure, size=20, ha="left")
@@ -425,17 +425,17 @@ for select in statelist :
         thirdPage.clf()
         txt = 'Forecasts (7 days from now)'
         txt1 = '1. Total Confirmed Cases : '+str(tot)
-        txt2 = '2. Active Cases : '+str(activepred[-1])
-        txt3 = '3. Cured Cases : '+str(curespred[-1])
-        txt4 = '4. Deaths : '+str(deathspred[-1])
+        txt2 = '2. Active Cases : '+str(sactivepred[-1])
+        txt3 = '3. Cured Cases : '+str(scurespred[-1])
+        txt4 = '4. Deaths : '+str(sdeathspred[-1])
         txt5 = '5. Daily Increase : '+str(increase2)
         txt6 = '6. Total Cases Per Million : '+str(round(total2,2))
         txt7 = '7. Active Cases Per Million : '+str(round(active2,2))
         txt8 = '8. Cured Cases Per Million : '+str(round(cured2,2))
         txt9 = '9. Deaths Per Million : '+str(round(deaths2,2))
-        txt10 = '10. Mortality Rate : '+str(round(mortality2,2))
-        txt11 = '11. Growth Rate : '+str(round(rate2,2))
-        txt12 = '12. Recovery Rate : '+str(round(recovery2,2))
+        txt10 = '10. Mortality Rate : '+str(round(mortality2,2))+'%'
+        txt11 = '11. Growth Rate : '+str(round(rate2,2))+'%'
+        txt12 = '12. Recovery Rate : '+str(round(recovery2,2))+'%'
         txt13 = 'Covid-19 India Dashboard'
 
         thirdPage.text(0.05,0.90,txt, transform=thirdPage.transFigure, size=24, ha="left")
@@ -460,10 +460,10 @@ for select in statelist :
         fourthPage.clf()
         txt = 'Details to note before viewing graphs'
         txt1 = '1. All graphs are from 1st March, 2020 till date'
-        txt2 = '2. The Pie Chart is of the data on '+str(df.at[last,'Date'])
-        txt3 = '3. The points marked on the graphs are in order of important dates'
-        txt4 = '4. All the data used is the Public data from the MOHFW India'
-        txt5 = '5. The dates are the national lockdown dates'
+        txt2 = '2. Any steep slope upwards is a sign that a lockdown is required'
+        txt3 = '2. The points marked on the graphs are in order of important dates'
+        txt4 = '3. All the data used is the Public data from the MOHFW India'
+        txt5 = '4. The dates are the national lockdown dates'
         txt6 = 'Important Dates '
         txt7 = 'Lockdown 1 : 25-03-2020'
         txt8 = 'Lockdown 2 : 15-04-2020'
@@ -494,13 +494,13 @@ for select in statelist :
         cur = 100 * selected_df.at[last,'Cured']/(selected_df.at[last,'Active']+selected_df.at[last,'Cured']+selected_df.at[last,'Deaths'])
         dea = 100 * selected_df.at[last,'Deaths']/(selected_df.at[last,'Active']+selected_df.at[last,'Cured']+selected_df.at[last,'Deaths'])
         labels = ['Active '+str(round(act,2))+'%','Cured '+str(round(cur,2))+'%','Deaths '+str(round(dea,2))+'%']
-        labels = ['Deaths','Active','Cured']
-        values = [selected_df.at[last,'Deaths'], selected_df.at[last,'Active'], selected_df.at[last,'Cured']]
+        # labels = ['Deaths','Active','Cured']
+        values = [selected_df.at[last,'Active'], selected_df.at[last,'Cured'],selected_df.at[last,'Deaths']]
         # colors = ['mediumseagreen','firebrick','royalblue']
-        colors = ['#C4C7CE', '#EF5939', 'royalblue']
+        colors = ['#EF5939', 'royalblue','#C4C7CE']
         plt.pie(values, radius=1, colors=colors,
                wedgeprops=dict(width=0.7), labels = labels)
-        txt = 'Current State of India'
+        txt = 'Current State of '+str(select)
         txt1 = 'The Pie chart shows the distribution of cases in India'
         txt2 = 'Covid-19 India Dashboard'
         plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
@@ -515,7 +515,7 @@ for select in statelist :
         plt.xlabel('Days from 1st March')
         plt.ylabel('Active Cases')
         plt.grid(True)
-        txt = 'Active Cases'
+        txt = 'Active Cases : '+str(selected_df.at[last,'Active'])+" Cases"
         txt1 = 'The graph shows the change in Active Cases from 1st March till date'
         txt2 = 'Covid-19 India Dashboard'
         plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
@@ -530,7 +530,7 @@ for select in statelist :
         plt.xlabel('Days from 1st March')
         plt.ylabel('Cured Cases')
         plt.grid(True)
-        txt = 'Cured Cases'
+        txt = 'Cured Cases : '+str(selected_df.at[last,'Cured'])+" Cases"
         txt1 = 'The graph shows the change in Cured Cases from 1st March till date'
         txt2 = 'Covid-19 India Dashboard'
         plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
@@ -545,7 +545,7 @@ for select in statelist :
         plt.xlabel('Days from 1st March')
         plt.ylabel('Deaths')
         plt.grid(True)
-        txt = 'Deaths'
+        txt = 'Deaths: '+str(selected_df.at[last,'Deaths'])+" Cases"
         txt1 = 'The graph shows the change in Deaths from 1st March till date'
         txt2 = 'Covid-19 India Dashboard'
         plt.text(0.05,0.95,txt, transform=fig.transFigure, size=24, ha="left")
