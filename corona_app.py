@@ -25,24 +25,11 @@ import warnings
 import os
 register_matplotlib_converters()
 warnings.filterwarnings('ignore')
-# os.chdir(r"C:\Users\Ankush Lakkanna\Covid19")
 
-with open("INDIA_STATES.json") as f:
-    india = geojson.load(f)
-
-# @st.cache(persist=True)
 def load_data() :
     data = pd.read_csv("india_corona_data1.csv")
     return data
-#
-# with open(r"C:\Users\Ankush Lakkanna\Covid19\styles.css") as f:
-#     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-# st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
-# st.markdown("<head><link rel='stylesheet' href='styles.css'></head>", unsafe_allow_html=True)
-# COLOR = "black"
-# BACKGROUND_COLOR = "#fff"
-# local_css("styles.css")
-# state = pd.read_csv(r"C:\Users\Ankush Lakkanna\states.csv")
+
 df = load_data()
 last = df.shape[0]-1
 state_df = pd.read_csv("state_data.csv")
@@ -56,60 +43,12 @@ st.title("Covid-19 India Dashboard")
 latest_data = state_df[state_df['Date']==latest_date].reset_index(drop=True)
 previous_data = state_df[state_df['Date']==previous_date].reset_index(drop=True)
 
-# st.write(pdk.Deck(
-#
-#     map_style="mapbox://styles/mapbox/light-v9",
-#     initial_view_state={
-#         "latitude": 22.5937,
-#         "longitude": 78.9629,
-#         "zoom": 3.5,
-#         "pitch":0,
-#     }))
-# state = pd.read_csv(r"C:\Users\Ankush Lakkanna\states.csv")
-# st1 = []
-# for i in range(0,len(india.features)) :
-#     st1.append(india.features[i].properties['STATE'])
-#
-# df1= latest_data[['State','Active']].reset_index(drop=True)
-# for i in range(len(st1)) :
-#     for x in range(0,len(df1['State'].tolist())) :
-#         if df1.at[x,'State'] == 'Telengana' and st1[i] == 'TELANGANA' :
-#             df1.at[x,'State1'] = 'TELANGANA'
-#         if df1.at[x,'State'].lower() in st1[i].lower() :
-#             df1.at[x,'State1'] = st1[i]
+preprocess = pd.read_csv('preprocess.csv')
 
-df1 = df[['Date','Active Cases']]
-df1['Date'] = pd.to_datetime(df1['Date'], format='%d-%m-%Y')
-df1.set_index('Date', inplace=True, drop=True)
-df1.index = pd.to_datetime(df1.index)
+activepred = preprocess[preprocess['State']=='All States']['Active'].tolist()
+curedpred = preprocess[preprocess['State']=='All States']['Cured'].tolist()
+deathspred = preprocess[preprocess['State']=='All States']['Deaths'].tolist()
 
-activemodel = SARIMAX(df1, order=(0, 1, 1), seasonal_order=(0, 1, 1, 6))
-activemodel_fit = activemodel.fit(disp=False)
-activepred = []
-for i in range(1,14,2) :
-    activepred.append(int(activemodel_fit.predict(len(df1)+i, len(df1)+i)))
-
-df2 = df[['Date','Cured / Discharged']]
-df2['Date'] = pd.to_datetime(df2['Date'], format='%d-%m-%Y')
-df2.set_index('Date', inplace=True, drop=True)
-df2.index = pd.to_datetime(df2.index)
-
-curedmodel = SARIMAX(df2, order=(1, 1, 1), seasonal_order=(1, 1, 1, 2))
-curedmodel_fit = curedmodel.fit(disp=False)
-curedpred = []
-for i in range(0,7) :
-    curedpred.append(int(curedmodel_fit.predict(len(df2)+i, len(df2)+i)))
-
-df3 = df[['Date','Deaths']]
-df3['Date'] = pd.to_datetime(df3['Date'], format='%d-%m-%Y')
-df3.set_index('Date', inplace=True, drop=True)
-df3.index = pd.to_datetime(df3.index)
-
-deathsmodel = SARIMAX(df3, order=(1, 2, 1), seasonal_order=(1, 1, 1, 2))
-deathsmodel_fit = deathsmodel.fit(disp=False)
-deathspred = []
-for i in range(0,7) :
-    deathspred.append(int(deathsmodel_fit.predict(len(df3)+i, len(df3)+i)))
 
 select = st.selectbox('State', ['All States']+sorted(state_df['State'].unique().tolist()))
 
@@ -183,7 +122,6 @@ if select == 'All States' :
             dfx.at[j,'Cured'] = df.at[i,'Cured / Discharged']
             dfx.at[j,'Deaths'] = df.at[i,'Deaths']
             j+=1
-
 
     # if st.button('Download'):
     download_text = select.replace(' ','%20')+'%20Report.pdf'
@@ -277,7 +215,7 @@ if select == 'All States' :
         )
     # st.markdown(
     #         """
-    # Data Source : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
+    # Contact  : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
     # """
     #     )
 else :
@@ -313,38 +251,9 @@ else :
 """
     )
 
-    sdf1 = selected_df[['Date','Active']]
-    sdf1['Date'] = pd.to_datetime(sdf1['Date'], format='%d-%m-%Y')
-    sdf1.set_index('Date', inplace=True, drop=True)
-    sdf1.index = pd.to_datetime(sdf1.index)
-
-    sactivemodel = SARIMAX(sdf1, order=(0, 1, 1), seasonal_order=(0, 1, 1, 10))
-    sactivemodel_fit = sactivemodel.fit(disp=False)
-    sactivepred = []
-    for i in range(0,7) :
-        sactivepred.append(int(sactivemodel_fit.predict(len(sdf1)+i, len(sdf1)+i)))
-
-    sdf2 = selected_df[['Date','Cured']]
-    sdf2['Date'] = pd.to_datetime(sdf2['Date'], format='%d-%m-%Y')
-    sdf2.set_index('Date', inplace=True, drop=True)
-    sdf2.index = pd.to_datetime(sdf2.index)
-
-    scuredmodel = SARIMAX(sdf2, order=(1, 1, 1), seasonal_order=(1, 1, 1, 2))
-    scuredmodel_fit = scuredmodel.fit(disp=False)
-    scuredpred = []
-    for i in range(0,7) :
-        scuredpred.append(int(scuredmodel_fit.predict(len(sdf2)+i, len(sdf2)+i)))
-
-    sdf3 = selected_df[['Date','Deaths']]
-    sdf3['Date'] = pd.to_datetime(sdf3['Date'], format='%d-%m-%Y')
-    sdf3.set_index('Date', inplace=True, drop=True)
-    sdf3.index = pd.to_datetime(sdf3.index)
-
-    sdeathsmodel = SARIMAX(sdf3, order=(1, 2, 1), seasonal_order=(1, 1, 1, 2), initialization='approximate_diffuse')
-    sdeathsmodel_fit = sdeathsmodel.fit(disp=False)
-    sdeathspred = []
-    for i in range(0,7) :
-        sdeathspred.append(int(sdeathsmodel_fit.predict(len(sdf3)+i, len(sdf3)+i)))
+    sactivepred = preprocess[preprocess['State']==select]['Active'].tolist()
+    scuredpred = preprocess[preprocess['State']==select]['Cured'].tolist()
+    sdeathspred = preprocess[preprocess['State']==select]['Deaths'].tolist()
 
     datex = []
     for i in range(0,7) :
@@ -353,16 +262,6 @@ else :
         datex.append(dot)
     dd = pd.DataFrame()
     dd['Date'] = datex
-
-    tot = activepred[-1]+curedpred[-1]+deathspred[-1]
-    total2 = (tot/spop)*1000000
-    active2 = (activepred[-1]/spop)*1000000
-    cured2 = (curedpred[-1]/spop)*1000000
-    deaths2 = (deathspred[-1]/spop)*1000000
-    mortality2 = (deathspred[-1]/tot)*100
-    rate2 = (((tot - df.at[last,'Total Cases'])/ df.at[last,'Total Cases'])*100)/7
-    increase2 = activepred[-1]-activepred[-2]
-    recovery2 = (curedpred[-1]/(tot))*100
 
     dfx = pd.DataFrame(columns=['Date','Active','Cured','Deaths'])
     dfx['Date'] = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
@@ -377,7 +276,6 @@ else :
             dfx.at[j,'Cured'] = selected_df.at[i,'Cured']
             dfx.at[j,'Deaths'] = selected_df.at[i,'Deaths']
             j+=1
-
 
     download_text = select.replace(' ','%20')+'%20Report.pdf'
     st.markdown("<a href= 'https://github.com/kushkatoshk/Covid19/raw/master/"+download_text+"' download>Download Report</a>", unsafe_allow_html=True)
@@ -432,7 +330,7 @@ else :
         go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
     fig3.add_trace(
-        go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='#575965', width=2), mode='markers', name='Important Dates'))
+        go.Scatter(x=dfx['Date'], y=dfx['Deaths'],line=dict(color='royalblue', width=2), mode='markers', name='Important Dates'))
     fig3.add_trace(
         go.Scatter(x=dd['Date'], y=sdeathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
@@ -469,74 +367,3 @@ else :
     Data Source : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
     """
         )
-
-    # total = df1['Active'].tolist()
-    # state_names = df1['State'].tolist()
-    # ind1 = total.index(min(total))
-    # min_name = state_names[ind1]
-    # ind2 = total.index(max(total))
-    # max_name= state_names[ind2]
-    # df2 = pd.DataFrame()
-    # df2 = df2.append(df1[df1['State']==state])
-    #
-    # df2 = df2.append(df1[df1['State']==min_name])
-    # df2 = df2.append(df1[df1['State']==max_name])
-    # df2 = df2.reset_index(drop=True)
-    #
-    # fig = go.Figure(data=px.choropleth(df2, geojson = india, color = 'Active', locations='State1',
-    #                     featureidkey ='properties.STATE', projection="mercator",color_continuous_scale ='Reds',scope='asia'))
-    # st.write(fig)
-
-# fig = go.Figure(data=go.choropleth(df1, geojson = india, color = 'Cases', locations='State1',featureidkey ='properties.STATE', projection="mercator",color_continuous_scale ='Reds',scope='asia'))
-# st.write(fig)
-
-# india_map = folium.Map(location=[22.5937 , 78.9629], zoom_start=4, tiles='Mapbox Bright')
-#
-# fig = go.Figure(data= india_map.choropleth(
-#     geo_data=india,
-#     data=df1,
-#     columns=['State1', 'Cases'],
-#     key_on='feature.properties.STATE',
-#     fill_color='OrRd',
-#     fill_opacity=0.7,
-#     line_opacity=0.2,
-#     legend_name='Active Cases in India',
-# #     threshold_scale = folium.colormap.linear
-# ))
-# st.write(fig)
-
-
-
-
-
-
-# fig = px.choropleth(df1, geojson=india, locations='State1', color='Cases',
-#                            color_continuous_scale="Reds",
-#                            range_color=(df1.Cases.min(), df1.Cases.max()),
-#                            scope="asia",
-#                            labels={'Cases':'Active Cases'}
-#                           )
-# # fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-# fig.show()
-
-# fig = go.Figure(data= india_map.choropleth(
-#     geo_data=india,
-#     data=df1,
-#     columns=['State1', 'Cases'],
-#     key_on='feature.properties.STATE',
-#     fill_color='OrRd',
-#     fill_opacity=0.7,
-#     line_opacity=0.2,
-#     legend_name='Active Cases in India',
-# #     threshold_scale = folium.colormap.linear
-# ))
-
-
-
-# st.write(df.at[0,'Date'])
-# hist = np.histogram(df['Active Cases'], bins=max(df['Active Cases']), range=(0, max(df['Active Cases'])))
-
-# df['Date']= pd.to_datetime(df['Date'], format='%d-%m-%Y')
-# fig = px.bar(df, x='Date', y='Active Cases', hover_data=['Date', 'Active Cases'], height=400)
-# st.write(fig)
-st.markdown("</html>", unsafe_allow_html=True)
