@@ -27,12 +27,12 @@ register_matplotlib_converters()
 warnings.filterwarnings('ignore')
 # os.chdir(r"C:\Users\Ankush Lakkanna\Covid19")
 
-with open(r"C:\Users\Ankush Lakkanna\Covid19\INDIA_STATES.json") as f:
+with open("INDIA_STATES.json") as f:
     india = geojson.load(f)
 
 # @st.cache(persist=True)
 def load_data() :
-    data = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\india_corona_data1.csv")
+    data = pd.read_csv("india_corona_data1.csv")
     return data
 #
 # with open(r"C:\Users\Ankush Lakkanna\Covid19\styles.css") as f:
@@ -45,8 +45,8 @@ def load_data() :
 # state = pd.read_csv(r"C:\Users\Ankush Lakkanna\states.csv")
 df = load_data()
 last = df.shape[0]-1
-state_df = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv")
-pop = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\population.csv")
+state_df = pd.read_csv("state_data.csv")
+pop = pd.read_csv("population.csv")
 # daily = pd.read_csv(r"C:\Users\Ankush Lakkanna\daily_corona.csv")
 dates = state_df['Date'].unique().tolist()
 latest_date = dates[-1]
