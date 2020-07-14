@@ -268,7 +268,7 @@ else :
     dd['Date'] = datex
 
     dfx = pd.DataFrame(columns=['Date','Active','Cured','Deaths'])
-    dfx['Date'] = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
+    # dater = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
     idate = ['25-03-2020', '15-04-2020', '04-05-2020', '18-05-2020', '01-06-2020']
     iactive = []
     icured = []
@@ -276,6 +276,7 @@ else :
     j=0
     for i in range(len(selected_df['Date'])) :
         if selected_df.at[i,'Date'] in idate :
+            dfx.at[j,'Date'] = selected_df.at[i,'Date']
             dfx.at[j,'Active'] = selected_df.at[i,'Active']
             dfx.at[j,'Cured'] = selected_df.at[i,'Cured']
             dfx.at[j,'Deaths'] = selected_df.at[i,'Deaths']

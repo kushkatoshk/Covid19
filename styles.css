@@ -30,3 +30,14 @@
 .button1{
   display:block;
   margin:0.4em auto;
+
+mkdir -p ~/.streamlit/
+echo "\
+[general]\n\
+email = \"ankush.lakkanna@gmail.com\"\n\
+" > ~/.streamlit/credentials.toml
+echo "\
+[server]\n\
+headless = true\n\
+enableCORS=false\n\
+port = $PORT\n\
