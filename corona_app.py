@@ -26,6 +26,8 @@ import os
 register_matplotlib_converters()
 warnings.filterwarnings('ignore')
 
+
+st.markdown("<meta name='viewport' content='width=device-width, initial-scale=1.0'>",unsafe_allow_html=True)
 def load_data() :
     data = pd.read_csv("india_corona_data1.csv")
     return data
@@ -200,16 +202,16 @@ if select == 'All States' :
 
     st.markdown("## Helpful Videos")
     st.markdown("### Covid-19 explained")
-    st.markdown("<iframe width='640' height='360' src='https://www.youtube.com/embed/BtN-goy9VOY' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
+    st.markdown("<iframe style='width:100%;height:393px' margin='auto' src='https://www.youtube.com/embed/BtN-goy9VOY' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
     st.markdown(" ")
     # st.markdown("Simulating an epidemic : https://www.youtube.com/watch?v=gxAaO2rsdIs")
     #https://www.youtube.com/watch?v=7OLpKqTriio
     st.markdown("### Simulating an epidemic")
-    st.markdown("<iframe width='640' height='360' src='https://www.youtube.com/embed/7OLpKqTriio' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
+    st.markdown("<iframe style='width:100%;height:393px' margin='auto' src='https://www.youtube.com/embed/7OLpKqTriio' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
     st.markdown(" ")
     #https://www.youtube.com/watch?v=P27HRClMf2U
     st.markdown("### Why Face Masks are important")
-    st.markdown("<iframe width='640' height='360' src='https://www.youtube.com/embed/P27HRClMf2U' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
+    st.markdown("<iframe style='width:100%;height:393px' margin='auto' src='https://www.youtube.com/embed/P27HRClMf2U' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
     st.markdown(" ")
     st.markdown(" ")
     st.markdown(
@@ -359,16 +361,16 @@ else :
 
     st.markdown("## Helpful Videos")
     st.markdown("### Covid-19 explained")
-    st.markdown("<iframe width='640' height='360' src='https://www.youtube.com/embed/BtN-goy9VOY' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
+    st.markdown("<iframe style='width:100%;height:393px' margin='auto' src='https://www.youtube.com/embed/BtN-goy9VOY' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
     st.markdown(" ")
     # st.markdown("Simulating an epidemic : https://www.youtube.com/watch?v=gxAaO2rsdIs")
     #https://www.youtube.com/watch?v=7OLpKqTriio
     st.markdown("### Simulating an epidemic")
-    st.markdown("<iframe width='640' height='360' src='https://www.youtube.com/embed/7OLpKqTriio' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
+    st.markdown("<iframe style='width:100%;height:393px' margin='auto' src='https://www.youtube.com/embed/7OLpKqTriio' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
     st.markdown(" ")
     #https://www.youtube.com/watch?v=P27HRClMf2U
     st.markdown("### Why Face Masks are important")
-    st.markdown("<iframe width='640' height='360' src='https://www.youtube.com/embed/P27HRClMf2U' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
+    st.markdown("<iframe style='width:100%;height:393px' margin='auto' src='https://www.youtube.com/embed/P27HRClMf2U' frameborder='0' allowfullscreen></iframe>", unsafe_allow_html=True)
     st.markdown(" ")
     st.markdown(" ")
     st.markdown(
