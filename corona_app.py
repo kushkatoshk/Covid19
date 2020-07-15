@@ -228,11 +228,12 @@ if select == 'All States' :
     Data Source : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
     """
         )
-    # st.markdown(
-    #         """
-    # Contact  : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
-    # """
-    #     )
+    st.markdown(
+            """
+    Contact  : [LinkedIn] (https://www.linkedin.com/in/ankush-lakkanna/)
+    """
+        )
+    st.markdown('Missed the Sidebar? Press the side arrow on the top-left corner of the site.')
 else :
 
     selected_df = state_df[state_df['State']==select].reset_index(drop=True)
@@ -391,3 +392,9 @@ else :
     Data Source : [Ministry of Health and Family Welfare] (https://www.mohfw.gov.in/)
     """
         )
+    st.markdown(
+            """
+    Contact  : [LinkedIn] (https://www.linkedin.com/in/ankush-lakkanna/)
+    """
+        )
+    st.markdown('Missed the Sidebar? Press the side arrow on the top-left corner of the site.')
