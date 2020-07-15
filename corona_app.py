@@ -41,7 +41,7 @@ dates = state_df['Date'].unique().tolist()
 latest_date = dates[-1]
 previous_date = dates[-2]
 st.title("Covid-19 India Dashboard")
-
+st.markdown("<span style=font-size:11pt;>Updated on  : "+df.at[last,'Date']+" 10:00 AM </span> ", unsafe_allow_html=True)
 latest_data = state_df[state_df['Date']==latest_date].reset_index(drop=True)
 previous_data = state_df[state_df['Date']==previous_date].reset_index(drop=True)
 
@@ -130,9 +130,9 @@ if select == 'All States' :
     st.markdown("<a href= 'https://github.com/kushkatoshk/Covid19/raw/master/India%20Report.pdf' class= 'a button1' download>Download Report</a>", unsafe_allow_html=True)
 # https://github.com/kushkatoshk/Covid19/raw/master/India%20Report.pdf
 
-    labels = ['Deaths','Active','Cured']
-    colors = ['#C4C7CE', '#EF5939', 'royalblue'] #'#264F73']
-    values = [df.at[last,'Deaths'].sum(), df.at[last,'Active Cases'].sum(), df.at[last,'Cured / Discharged'].sum()]
+    labels = ['Active','Cured','Deaths']
+    colors = ['#EF5939', 'royalblue', '#C4C7CE'] #'#264F73']
+    values = [df.at[last,'Active Cases'].sum(), df.at[last,'Cured / Discharged'].sum(), df.at[last,'Deaths'].sum()]
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3,marker=dict(colors=colors,))])
     # fig.update_traces(marker=dict(colors=colors))
     fig.update_layout(title_text = 'Current State in India')
@@ -289,10 +289,10 @@ else :
 
         # https://github.com/kushkatoshk/Covid19/raw/master/Andaman%20and%20Nicobar%20Islands%20Report.pdf
 
-    labels = ['Deaths','Active','Cured']
-    values = [selected_df.at[last,'Deaths'], selected_df.at[last,'Active'], selected_df.at[last,'Cured']]
+    labels = ['Active','Cured','Deaths']
+    values = [selected_df.at[last,'Active'], selected_df.at[last,'Cured'], selected_df.at[last,'Deaths']]
     # colors = ['mediumseagreen','firebrick','royalblue']
-    colors = ['#C4C7CE', '#EF5939', 'royalblue']
+    colors = ['#EF5939', 'royalblue', '#C4C7CE']
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3,marker=dict(colors=colors,))])
     # fig.update_traces(marker=dict(colors=colors))
     fig.update_layout(title_text = 'Current State in '+select)
