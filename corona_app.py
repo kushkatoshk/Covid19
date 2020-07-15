@@ -130,13 +130,15 @@ if select == 'All States' :
     st.markdown("<a href= 'https://github.com/kushkatoshk/Covid19/raw/master/India%20Report.pdf' class= 'a button1' download>Download Report</a>", unsafe_allow_html=True)
 # https://github.com/kushkatoshk/Covid19/raw/master/India%20Report.pdf
 
+    st.markdown("<span style=font-size:16pt;>Current State in India </span>", unsafe_allow_html=True)
     labels = ['Active','Cured','Deaths']
     colors = ['#EF5939', 'royalblue', '#C4C7CE'] #'#264F73']
     values = [df.at[last,'Active Cases'].sum(), df.at[last,'Cured / Discharged'].sum(), df.at[last,'Deaths'].sum()]
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3,marker=dict(colors=colors,))])
     # fig.update_traces(marker=dict(colors=colors))
     config = {'responsive': True}
-    fig.update_layout(title_text = 'Current State in India')
+    # st.markdown("<span style=font-size:16pt;>Current State in India </span>", unsafe_allow_html=True)
+    # fig.update_layout(title_text = 'Current State in India')
     # fig.show(config = config)
     st.plotly_chart(fig, use_container_width=True)
     # st.write(fig)
@@ -150,8 +152,9 @@ if select == 'All States' :
     curedlist = df['Cured / Discharged'].tolist()+[curedpred[0]]
     deathslist = df['Deaths'].tolist()+[deathspred[0]]
 
+    st.markdown("<span style=font-size:16pt;>Active Cases with Forecast </span>", unsafe_allow_html=True)
     fig1 = go.Figure()
-    fig1.update_layout(title_text = 'Active Cases with Forecast',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
+    # fig1.update_layout(title_text = 'Active Cases with Forecast')
     fig1.add_trace(
         go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
@@ -161,10 +164,12 @@ if select == 'All States' :
     fig1.add_trace(
         go.Scatter(x=dd['Date'], y=activepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
+    fig1.update_layout(legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     st.plotly_chart(fig1, use_container_width=True)
 
+    st.markdown("<span style=font-size:16pt;>Cured Cases with Forecast </span>", unsafe_allow_html=True)
     fig2 = go.Figure()
-    fig2.update_layout(title_text = 'Cured Cases with Forecast',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
+    fig2.update_layout(legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig2.add_trace(
         go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Cured</b> : %{y:.0}'))
@@ -177,8 +182,9 @@ if select == 'All States' :
     fig2.update_layout(hovermode="x unified")
     st.plotly_chart(fig2, use_container_width=True)
 
+    st.markdown("<span style=font-size:16pt;>Deaths with Forecast </span>", unsafe_allow_html=True)
     fig3 = go.Figure()
-    fig3.update_layout(title_text = 'Deaths with Forecast',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
+    fig3.update_layout(legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig3.add_trace(
         go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Deaths</b> : %{y:.0}'))
@@ -201,7 +207,7 @@ if select == 'All States' :
     st.markdown("##   State Data ")
     state1 = latest_data.sort_values(by=['Active'],ascending=False).reset_index(drop=True)
     inds = pd.Series(range(1,36))
-    st.table(state1.set_index(inds))
+    st.table(state1[['State','Active','Cured','Deaths','Total']].set_index(inds))
 
     st.markdown("## Helpful Videos")
     st.markdown("### Covid-19 explained")
@@ -292,13 +298,14 @@ else :
 
         # https://github.com/kushkatoshk/Covid19/raw/master/Andaman%20and%20Nicobar%20Islands%20Report.pdf
 
+    st.markdown("<span style=font-size:16pt;>Current State in "+select+" </span>", unsafe_allow_html=True)
     labels = ['Active','Cured','Deaths']
     values = [selected_df.at[last,'Active'], selected_df.at[last,'Cured'], selected_df.at[last,'Deaths']]
     # colors = ['mediumseagreen','firebrick','royalblue']
     colors = ['#EF5939', 'royalblue', '#C4C7CE']
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3,marker=dict(colors=colors,))])
     # fig.update_traces(marker=dict(colors=colors))
-    fig.update_layout(title_text = 'Current State in '+select)
+    # fig.update_layout(title_text = 'Current State in '+select)
     st.plotly_chart(fig, use_container_width=True)
 
     selected_df['Date'] = pd.to_datetime(selected_df['Date'], format='%d-%m-%Y')
@@ -310,8 +317,9 @@ else :
     curedlist = selected_df['Cured'].tolist()+[scuredpred[0]]
     deathslist = selected_df['Deaths'].tolist()+[sdeathspred[0]]
 
+    st.markdown("<span style=font-size:16pt;>Active Cases with Forecast </span>", unsafe_allow_html=True)
     fig1 = go.Figure()
-    fig1.update_layout(title_text = 'Active Cases',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
+    fig1.update_layout(legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig1.add_trace(
         go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
@@ -323,8 +331,9 @@ else :
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
     st.plotly_chart(fig1, use_container_width=True)
 
+    st.markdown("<span style=font-size:16pt;>Cured Cases with Forecast </span>", unsafe_allow_html=True)
     fig2 = go.Figure()
-    fig2.update_layout(title_text = 'Cured Cases',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
+    fig2.update_layout(legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig2.add_trace(
         go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Cured</b> : %{y:.0}'))
@@ -336,8 +345,9 @@ else :
                                                                                                                             '<br><b>Cured</b> : %{y:.0}'))
     st.plotly_chart(fig2, use_container_width=True)
 
+    st.markdown("<span style=font-size:16pt;>Deaths with Forecast </span>", unsafe_allow_html=True)
     fig3 = go.Figure()
-    fig3.update_layout(title_text = 'Deaths',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
+    fig3.update_layout(legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig3.add_trace(
         go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Deaths</b> : %{y:.0}'))
@@ -360,7 +370,7 @@ else :
     st.markdown("##   State Data ")
     state1 = latest_data.sort_values(by=['Active'],ascending=False).reset_index(drop=True)
     inds = pd.Series(range(1,36))
-    st.table(state1.set_index(inds))
+    st.table(state1[['State','Active','Cured','Deaths','Total']].set_index(inds))
 
     st.markdown("## Helpful Videos")
     st.markdown("### Covid-19 explained")
