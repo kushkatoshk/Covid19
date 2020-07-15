@@ -71,4 +71,4 @@ else :
     df = df.append(df1).reset_index(drop=True)
     df = df[['Date','Active Cases','Cured / Discharged','Deaths','Migrated','Total Cases','Increase in Active Cases']]
 
-df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\india_corona_data1.csv")
+df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\india_corona_data1.csv",index=False)
