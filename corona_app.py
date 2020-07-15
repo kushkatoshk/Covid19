@@ -371,7 +371,7 @@ else :
     st.markdown("##   State Data ")
     state1 = latest_data.sort_values(by=['Active'],ascending=False).reset_index(drop=True)
     inds = pd.Series(range(1,36))
-    st.table(state1[['State','Active','Cured','Deaths','Total']].set_index(inds))
+    st.table(state1[['State','Active','Cured','Deaths']].set_index(inds))
 
     st.markdown("## Helpful Videos")
     st.markdown("### Covid-19 explained")
