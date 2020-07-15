@@ -135,8 +135,11 @@ if select == 'All States' :
     values = [df.at[last,'Active Cases'].sum(), df.at[last,'Cured / Discharged'].sum(), df.at[last,'Deaths'].sum()]
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3,marker=dict(colors=colors,))])
     # fig.update_traces(marker=dict(colors=colors))
+    config = {'responsive': True}
     fig.update_layout(title_text = 'Current State in India')
-    st.write(fig)
+    # fig.show(config = config)
+    st.plotly_chart(fig, use_container_width=True)
+    # st.write(fig)
 
     df['Date'] = pd.to_datetime(df['Date'], format='%d-%m-%Y')
     dfx['Date'] = pd.to_datetime(dfx['Date'], format='%d-%m-%Y')
@@ -158,7 +161,7 @@ if select == 'All States' :
     fig1.add_trace(
         go.Scatter(x=dd['Date'], y=activepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
-    st.write(fig1)
+    st.plotly_chart(fig1, use_container_width=True)
 
     fig2 = go.Figure()
     fig2.update_layout(title_text = 'Cured Cases with Forecast')
@@ -172,7 +175,7 @@ if select == 'All States' :
         go.Scatter(x=dd['Date'], y=curedpred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Cured</b> : %{y:.0}'))
     fig2.update_layout(hovermode="x unified")
-    st.write(fig2)
+    st.plotly_chart(fig2, use_container_width=True)
 
     fig3 = go.Figure()
     fig3.update_layout(title_text = 'Deaths with Forecast')
@@ -185,7 +188,7 @@ if select == 'All States' :
     fig3.add_trace(
         go.Scatter(x=dd['Date'], y=deathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Deaths</b> : %{y:.0}'))
-    st.write(fig3)
+    st.plotly_chart(fig3, use_container_width=True)
 
     st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
     st.markdown("<span style=font-size:16pt;>Active Cases Per Million : </span> "+str(round(active1,2))+" Per Million", unsafe_allow_html=True)
@@ -296,7 +299,7 @@ else :
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3,marker=dict(colors=colors,))])
     # fig.update_traces(marker=dict(colors=colors))
     fig.update_layout(title_text = 'Current State in '+select)
-    st.write(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
     selected_df['Date'] = pd.to_datetime(selected_df['Date'], format='%d-%m-%Y')
     dfx['Date'] = pd.to_datetime(dfx['Date'], format='%d-%m-%Y')
@@ -318,7 +321,7 @@ else :
     fig1.add_trace(
         go.Scatter(x=dd['Date'], y=sactivepred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
-    st.write(fig1)
+    st.plotly_chart(fig1, use_container_width=True)
 
     fig2 = go.Figure()
     fig2.update_layout(title_text = 'Cured Cases')
@@ -331,7 +334,7 @@ else :
     fig2.add_trace(
         go.Scatter(x=dd['Date'], y=scuredpred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Cured</b> : %{y:.0}'))
-    st.write(fig2)
+    st.plotly_chart(fig2, use_container_width=True)
 
     fig3 = go.Figure()
     fig3.update_layout(title_text = 'Deaths')
@@ -344,7 +347,7 @@ else :
     fig3.add_trace(
         go.Scatter(x=dd['Date'], y=sdeathspred,line=dict(color='#EACB48', width=2), mode='lines', name='Forecast', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Deaths</b> : %{y:.0}'))
-    st.write(fig3)
+    st.plotly_chart(fig3, use_container_width=True)
 
     st.markdown("<span style=font-size:16pt;>Total Cases Per Million  : </span> "+str(round(total1,2))+" Per Million", unsafe_allow_html=True)
     st.markdown("<span style=font-size:16pt;>Active Cases Per Million : </span> "+str(round(active1,2))+" Per Million", unsafe_allow_html=True)
