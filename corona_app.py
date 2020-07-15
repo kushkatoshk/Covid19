@@ -151,7 +151,7 @@ if select == 'All States' :
     deathslist = df['Deaths'].tolist()+[deathspred[0]]
 
     fig1 = go.Figure()
-    fig1.update_layout(title_text = 'Active Cases with Forecast')
+    fig1.update_layout(title_text = 'Active Cases with Forecast',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig1.add_trace(
         go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
@@ -164,7 +164,7 @@ if select == 'All States' :
     st.plotly_chart(fig1, use_container_width=True)
 
     fig2 = go.Figure()
-    fig2.update_layout(title_text = 'Cured Cases with Forecast')
+    fig2.update_layout(title_text = 'Cured Cases with Forecast',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig2.add_trace(
         go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Cured</b> : %{y:.0}'))
@@ -178,7 +178,7 @@ if select == 'All States' :
     st.plotly_chart(fig2, use_container_width=True)
 
     fig3 = go.Figure()
-    fig3.update_layout(title_text = 'Deaths with Forecast')
+    fig3.update_layout(title_text = 'Deaths with Forecast',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig3.add_trace(
         go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Deaths</b> : %{y:.0}'))
@@ -311,7 +311,7 @@ else :
     deathslist = selected_df['Deaths'].tolist()+[sdeathspred[0]]
 
     fig1 = go.Figure()
-    fig1.update_layout(title_text = 'Active Cases')
+    fig1.update_layout(title_text = 'Active Cases',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig1.add_trace(
         go.Scatter(x=datelist, y=activelist,line=dict(color='firebrick', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Active</b> : %{y:.0}'))
@@ -324,7 +324,7 @@ else :
     st.plotly_chart(fig1, use_container_width=True)
 
     fig2 = go.Figure()
-    fig2.update_layout(title_text = 'Cured Cases')
+    fig2.update_layout(title_text = 'Cured Cases',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig2.add_trace(
         go.Scatter(x=datelist, y=curedlist,line=dict(color='royalblue', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Cured</b> : %{y:.0}'))
@@ -337,7 +337,7 @@ else :
     st.plotly_chart(fig2, use_container_width=True)
 
     fig3 = go.Figure()
-    fig3.update_layout(title_text = 'Deaths')
+    fig3.update_layout(title_text = 'Deaths',legend=dict(orientation="h",yanchor="bottom",y=1.02,xanchor="right",x=1))
     fig3.add_trace(
         go.Scatter(x=datelist, y=deathslist,line=dict(color='#575965', width=2), mode='lines', name='Recorded', hovertemplate ='<b>Date</b> : %{x}'+
                                                                                                                             '<br><b>Deaths</b> : %{y:.0}'))
