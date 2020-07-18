@@ -101,3 +101,5 @@ else :
 	# df.to_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv",index=False)
 
 	print("Updated")
+
+	driver.close()
