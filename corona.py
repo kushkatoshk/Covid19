@@ -23,7 +23,7 @@ today = datetime.today().strftime("%d-%m-%Y")[:10]
 yest = (datetime.today() - timedelta(days=1)).strftime("%d-%m-%Y")[:10]
 
 dates = df['Date'].unique().tolist()
-if yest in dates :
+if today in dates :
 
 	print("Already run")
 
@@ -49,7 +49,7 @@ else :
 	sfn = []
 	scured = []
 	sdeaths = []
-	for t in tr[1:-6] :
+	for t in tr[1:-5] :
 	    ele = t.find_all('td')
 	    if ele[1].get_text() == 'Dadra and Nagar Haveli and Daman and Diu' :
 	    	state.append('Daman and Diu')
@@ -66,7 +66,7 @@ else :
 	dfs['Active'] = scases
 	dfs['Cured'] = scured
 	dfs['Deaths'] = sdeaths
-	dfs['Date'] = yest
+	dfs['Date'] = today
 	dfs['Total'] = 0
 
 	df = df.append(dfs)
