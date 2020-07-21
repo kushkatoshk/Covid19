@@ -272,7 +272,7 @@ else :
     sdeathspred = preprocess[preprocess['State']==select]['Deaths'].tolist()
 
     datex = []
-    for i in range(0,7) :
+    for i in range(1,8) :
         dot = str(datetime.today() + timedelta(days=i))[:10]
         dot = dot[8:]+'-'+dot[5:7]+'-'+dot[:4]
         datex.append(dot)
