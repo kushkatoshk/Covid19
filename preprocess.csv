@@ -1,60 +1,60 @@
 State,Active,Cured,Deaths
-All States,432586,778984,29362
-All States,457281,805394,29975
-All States,475770,831600,30615
-All States,497514,857654,31239
-All States,522209,883917,31888
-All States,540699,909905,32521
-All States,562442,936181,33179
-Andaman and Nicobar Islands,53,163,0
-Andaman and Nicobar Islands,51,169,0
-Andaman and Nicobar Islands,50,173,0
-Andaman and Nicobar Islands,48,180,0
-Andaman and Nicobar Islands,53,184,0
-Andaman and Nicobar Islands,55,191,0
-Andaman and Nicobar Islands,55,195,0
-Andhra Pradesh,35156,26971,820
-Andhra Pradesh,35989,28346,887
-Andhra Pradesh,36840,29784,954
-Andhra Pradesh,38282,31194,1026
-Andhra Pradesh,39792,32667,1098
-Andhra Pradesh,41397,34113,1174
-Andhra Pradesh,43739,35621,1252
-Arunachal Pradesh,552,361,3
-Arunachal Pradesh,578,371,3
-Arunachal Pradesh,614,398,3
-Arunachal Pradesh,616,413,3
-Arunachal Pradesh,656,458,3
-Arunachal Pradesh,678,470,3
-Arunachal Pradesh,649,504,3
-Assam,7222,19085,58
-Assam,7432,20037,60
-Assam,7797,21124,62
-Assam,7896,22118,65
-Assam,8071,23250,67
-Assam,7924,24290,70
-Assam,8439,25469,72
-Bihar,10752,19486,219
-Bihar,11201,20467,222
-Bihar,11907,21423,225
-Bihar,12529,22387,229
-Bihar,13030,23342,232
-Bihar,14103,24303,235
-Bihar,14684,25259,238
-Chandigarh,223,523,12
-Chandigarh,227,530,12
-Chandigarh,227,538,12
-Chandigarh,229,543,13
-Chandigarh,230,552,13
-Chandigarh,235,557,13
-Chandigarh,241,566,14
-Chhattisgarh,1566,4281,30
-Chhattisgarh,1606,4425,31
-Chhattisgarh,1633,4592,32
-Chhattisgarh,1656,4731,34
-Chhattisgarh,1661,4898,35
-Chhattisgarh,1719,5036,36
-Chhattisgarh,1758,5204,38
+All States,465348,850238,31304
+All States,484215,884790,32016
+All States,510735,919631,32763
+All States,536078,955007,33489
+All States,554945,991189,34244
+All States,581465,1027628,34979
+All States,606808,1065017,35744
+Andaman and Nicobar Islands,72,173,0
+Andaman and Nicobar Islands,71,180,0
+Andaman and Nicobar Islands,75,184,0
+Andaman and Nicobar Islands,76,191,0
+Andaman and Nicobar Islands,77,195,0
+Andaman and Nicobar Islands,79,202,0
+Andaman and Nicobar Islands,78,205,0
+Andhra Pradesh,35968,44100,946
+Andhra Pradesh,37521,50469,1011
+Andhra Pradesh,39117,61630,1078
+Andhra Pradesh,40886,71762,1147
+Andhra Pradesh,43572,83384,1217
+Andhra Pradesh,47716,94742,1291
+Andhra Pradesh,50579,110556,1365
+Arunachal Pradesh,690,352,3
+Arunachal Pradesh,692,367,3
+Arunachal Pradesh,733,384,3
+Arunachal Pradesh,754,400,3
+Arunachal Pradesh,725,417,3
+Arunachal Pradesh,771,433,3
+Arunachal Pradesh,806,451,3
+Assam,8529,20413,74
+Assam,8626,22653,78
+Assam,8797,22505,82
+Assam,8655,24705,86
+Assam,9154,24576,90
+Assam,9388,26771,94
+Assam,9550,26644,98
+Bihar,11751,21843,217
+Bihar,12361,22922,218
+Bihar,12850,23990,219
+Bihar,13902,25061,219
+Bihar,14476,26128,220
+Bihar,15094,27197,221
+Bihar,15099,28265,222
+Chandigarh,252,538,13
+Chandigarh,254,543,13
+Chandigarh,255,552,14
+Chandigarh,260,557,14
+Chandigarh,266,567,14
+Chandigarh,267,571,15
+Chandigarh,266,581,15
+Chhattisgarh,1893,4513,31
+Chhattisgarh,1920,4638,32
+Chhattisgarh,1929,4780,33
+Chhattisgarh,1996,4899,34
+Chhattisgarh,2041,5041,35
+Chhattisgarh,2081,5158,36
+Chhattisgarh,2068,5300,38
 Dadar Nagar Haveli,19,2,0
 Dadar Nagar Haveli,19,2,0
 Dadar Nagar Haveli,20,2,0
@@ -62,199 +62,199 @@ Dadar Nagar Haveli,24,2,0
 Dadar Nagar Haveli,28,2,0
 Dadar Nagar Haveli,30,3,0
 Dadar Nagar Haveli,35,3,0
-Daman and Diu,238,481,2
-Daman and Diu,246,503,2
-Daman and Diu,242,521,2
-Daman and Diu,233,543,2
-Daman and Diu,237,561,2
-Daman and Diu,250,583,2
-Daman and Diu,252,601,2
-Delhi,15109,107893,3730
-Delhi,15399,109469,3763
-Delhi,15741,111242,3805
-Delhi,15560,112897,3838
-Delhi,15995,114670,3880
-Delhi,16296,116340,3914
-Delhi,15734,118113,3956
-Goa,1600,2568,27
-Goa,1629,2697,29
-Goa,1690,2823,30
-Goa,1728,2940,32
-Goa,1726,3064,33
-Goa,1755,3185,35
-Goa,1810,3310,36
-Gujarat,11866,37194,2223
-Gujarat,11985,37922,2251
-Gujarat,12085,38685,2279
-Gujarat,12246,39405,2308
-Gujarat,12354,40162,2336
-Gujarat,12479,40878,2365
-Gujarat,12556,41631,2394
-Haryana,6138,21512,371
-Haryana,6154,22062,379
-Haryana,6143,22617,387
-Haryana,6158,23174,395
-Haryana,6221,23731,403
-Haryana,6321,24287,412
-Haryana,6368,24844,420
-Himachal Pradesh,584,1090,11
-Himachal Pradesh,590,1104,11
-Himachal Pradesh,595,1116,11
-Himachal Pradesh,600,1129,11
-Himachal Pradesh,604,1142,11
-Himachal Pradesh,604,1156,11
-Himachal Pradesh,608,1169,11
-Jammu and Kashmir,6732,8628,273
-Jammu and Kashmir,6814,8776,282
-Jammu and Kashmir,6937,8960,293
-Jammu and Kashmir,7074,9125,302
-Jammu and Kashmir,7245,9319,313
-Jammu and Kashmir,7481,9491,324
-Jammu and Kashmir,7469,9688,335
-Jharkhand,3317,2962,57
-Jharkhand,3386,3037,60
-Jharkhand,3437,3096,63
-Jharkhand,3532,3169,66
-Jharkhand,3667,3228,69
-Jharkhand,3811,3301,72
-Jharkhand,4003,3360,75
-Karnataka,45703,26266,1534
-Karnataka,47612,27906,1602
-Karnataka,48793,28714,1675
-Karnataka,50904,30349,1745
-Karnataka,54073,31157,1820
-Karnataka,57026,32791,1892
-Karnataka,61013,33599,1969
-Kerala,8515,6141,45
-Kerala,8852,6389,46
-Kerala,9350,6637,48
-Kerala,9835,6876,50
-Kerala,10414,7121,51
-Kerala,11159,7356,53
-Kerala,11577,7599,55
-Ladakh,191,1013,2
-Ladakh,208,1028,2
-Ladakh,204,1032,2
-Ladakh,201,1048,2
-Ladakh,207,1052,2
-Ladakh,199,1068,2
-Ladakh,197,1072,2
-Madhya Pradesh,7166,16658,768
-Madhya Pradesh,7245,17142,781
-Madhya Pradesh,7392,17561,794
-Madhya Pradesh,7508,18047,807
-Madhya Pradesh,7693,18482,821
-Madhya Pradesh,7817,18981,834
-Madhya Pradesh,7961,19431,847
-Maharashtra,133912,187195,12521
-Maharashtra,135841,191519,12749
-Maharashtra,137650,196539,12995
-Maharashtra,139909,201109,13229
-Maharashtra,141812,206126,13478
-Maharashtra,145006,210675,13716
-Maharashtra,147021,215692,13969
-Manipur,619,1447,0
-Manipur,621,1485,0
-Manipur,624,1555,0
-Manipur,632,1621,0
-Manipur,620,1679,0
-Manipur,622,1732,0
-Manipur,649,1795,0
-Meghalaya,463,70,4
-Meghalaya,470,71,4
-Meghalaya,470,71,4
-Meghalaya,483,73,5
-Meghalaya,502,73,5
-Meghalaya,514,74,5
-Meghalaya,521,75,5
-Mizoram,153,173,0
-Mizoram,153,174,0
-Mizoram,153,179,0
-Mizoram,155,181,0
-Mizoram,159,186,0
-Mizoram,158,188,0
-Mizoram,159,193,0
-Nagaland,569,509,0
-Nagaland,584,517,0
-Nagaland,600,543,0
-Nagaland,607,551,0
-Nagaland,611,577,0
-Nagaland,619,585,0
-Nagaland,620,610,0
-Odisha,5491,13823,108
-Odisha,5647,14313,113
-Odisha,5701,14760,119
-Odisha,5750,15204,124
-Odisha,5859,15688,130
-Odisha,6081,16169,136
-Odisha,6148,16624,141
-Puducherry,850,1400,31
-Puducherry,853,1466,32
-Puducherry,867,1540,33
-Puducherry,873,1609,34
-Puducherry,906,1680,35
-Puducherry,932,1751,37
-Puducherry,945,1821,38
-Punjab,3265,7626,269
-Punjab,3287,7785,275
-Punjab,3345,8081,282
-Punjab,3300,8253,288
-Punjab,3327,8526,295
-Punjab,3360,8688,301
-Punjab,3378,8961,308
-Rajasthan,8211,23257,584
-Rajasthan,8244,23792,593
-Rajasthan,8285,24300,601
-Rajasthan,8483,24832,609
-Rajasthan,8616,25348,618
-Rajasthan,8651,25875,626
-Rajasthan,8762,26393,635
-Sikkim,229,106,0
-Sikkim,238,111,0
-Sikkim,241,111,0
-Sikkim,248,117,0
-Sikkim,254,118,0
-Sikkim,258,123,0
-Sikkim,261,124,0
-Tamil Nadu,51713,131042,2700
-Tamil Nadu,52808,135259,2777
-Tamil Nadu,53376,139534,2853
-Tamil Nadu,53932,143798,2932
-Tamil Nadu,54150,148048,3011
-Tamil Nadu,54627,152324,3091
-Tamil Nadu,55838,156568,3171
-Telangana,9248,40014,436
-Telangana,9604,42522,443
-Telangana,9932,45085,450
-Telangana,10197,47650,457
-Telangana,10383,50223,465
-Telangana,10641,52781,472
-Telangana,10781,55353,480
-Tripura,1482,1980,9
-Tripura,1487,2038,10
-Tripura,1502,2096,12
-Tripura,1493,2157,13
-Tripura,1521,2214,15
-Tripura,1516,2275,16
-Tripura,1567,2332,18
-Uttar Pradesh,21021,32832,1265
-Uttar Pradesh,21677,33836,1303
-Uttar Pradesh,22267,34809,1340
-Uttar Pradesh,22982,35810,1378
-Uttar Pradesh,23868,36781,1417
-Uttar Pradesh,24537,37782,1456
-Uttar Pradesh,25202,38752,1495
-Uttarakhand,1526,3360,56
-Uttarakhand,1530,3421,56
-Uttarakhand,1541,3486,58
-Uttarakhand,1546,3548,58
-Uttarakhand,1564,3611,59
-Uttarakhand,1574,3673,60
-Uttarakhand,1579,3736,61
-West Bengal,18577,29701,1211
-West Bengal,19160,31386,1243
-West Bengal,19653,33123,1274
-West Bengal,20314,34877,1306
-West Bengal,21063,36683,1338
-West Bengal,21879,38507,1371
-West Bengal,22624,40381,1403
+Daman and Diu,279,505,1
+Daman and Diu,276,524,2
+Daman and Diu,281,540,1
+Daman and Diu,294,560,2
+Daman and Diu,294,576,1
+Daman and Diu,297,595,1
+Daman and Diu,315,611,1
+Delhi,14817,110703,3783
+Delhi,14626,112242,3813
+Delhi,15060,113904,3851
+Delhi,15359,115469,3881
+Delhi,14787,117135,3920
+Delhi,14270,118705,3951
+Delhi,13694,120372,3990
+Goa,1736,2772,30
+Goa,1775,2879,32
+Goa,1773,2989,33
+Goa,1803,3098,35
+Goa,1859,3210,36
+Goa,1870,3318,38
+Goa,1897,3430,40
+Gujarat,12434,38753,2280
+Gujarat,12595,39480,2308
+Gujarat,12703,40245,2337
+Gujarat,12828,40968,2366
+Gujarat,12905,41729,2395
+Gujarat,12997,42449,2424
+Gujarat,13094,43208,2454
+Haryana,6384,22832,385
+Haryana,6399,23422,392
+Haryana,6462,24015,400
+Haryana,6561,24603,407
+Haryana,6609,25196,415
+Haryana,6675,25783,423
+Haryana,6743,26376,430
+Himachal Pradesh,706,1158,11
+Himachal Pradesh,710,1184,11
+Himachal Pradesh,715,1205,11
+Himachal Pradesh,715,1230,11
+Himachal Pradesh,719,1250,11
+Himachal Pradesh,726,1275,11
+Himachal Pradesh,754,1295,11
+Jammu and Kashmir,7743,8855,292
+Jammu and Kashmir,7905,8992,301
+Jammu and Kashmir,8104,9164,312
+Jammu and Kashmir,8370,9319,322
+Jammu and Kashmir,8346,9501,333
+Jammu and Kashmir,8377,9660,344
+Jammu and Kashmir,8574,9844,355
+Jharkhand,3911,3250,71
+Jharkhand,4035,3358,75
+Jharkhand,4227,3437,80
+Jharkhand,4412,3541,84
+Jharkhand,4678,3621,89
+Jharkhand,4759,3724,94
+Jharkhand,4880,3803,99
+Karnataka,51233,31376,1703
+Karnataka,53344,33478,1790
+Karnataka,56564,35551,1880
+Karnataka,59587,37637,1970
+Karnataka,63672,39715,2063
+Karnataka,66842,41800,2155
+Karnataka,70120,43879,2251
+Kerala,10056,6960,51
+Kerala,10581,7361,54
+Kerala,11223,7752,56
+Kerala,12028,8154,59
+Kerala,12465,8556,61
+Kerala,13233,8964,64
+Kerala,13836,9375,66
+Ladakh,170,1028,2
+Ladakh,167,1042,2
+Ladakh,173,1046,2
+Ladakh,165,1060,2
+Ladakh,163,1064,2
+Ladakh,160,1078,2
+Ladakh,166,1083,2
+Madhya Pradesh,7480,17872,792
+Madhya Pradesh,7598,18405,805
+Madhya Pradesh,7786,18925,817
+Madhya Pradesh,7912,19474,830
+Madhya Pradesh,8058,20011,843
+Madhya Pradesh,8209,20578,856
+Madhya Pradesh,8323,21132,869
+Maharashtra,142374,199684,13103
+Maharashtra,144835,204924,13338
+Maharashtra,146843,210429,13591
+Maharashtra,150248,215752,13832
+Maharashtra,152402,221329,14089
+Maharashtra,155943,226724,14335
+Maharashtra,158289,232373,14596
+Manipur,655,1538,0
+Manipur,662,1600,0
+Manipur,651,1650,0
+Manipur,653,1700,0
+Manipur,679,1761,0
+Manipur,688,1817,0
+Manipur,693,1872,0
+Meghalaya,451,78,4
+Meghalaya,461,79,4
+Meghalaya,476,80,4
+Meghalaya,485,81,4
+Meghalaya,491,82,4
+Meghalaya,504,83,4
+Meghalaya,531,84,5
+Mizoram,149,188,0
+Mizoram,151,190,0
+Mizoram,155,195,0
+Mizoram,155,197,0
+Mizoram,156,203,0
+Mizoram,160,205,0
+Mizoram,158,210,0
+Nagaland,670,550,0
+Nagaland,678,561,0
+Nagaland,679,580,0
+Nagaland,689,596,0
+Nagaland,688,616,0
+Nagaland,692,630,0
+Nagaland,704,650,0
+Odisha,6733,14888,119
+Odisha,6780,15363,125
+Odisha,6890,15860,131
+Odisha,7135,16423,137
+Odisha,7189,16934,143
+Odisha,7367,17429,149
+Odisha,7535,17936,155
+Puducherry,1007,1453,35
+Puducherry,1013,1502,36
+Puducherry,1048,1557,38
+Puducherry,1074,1611,39
+Puducherry,1088,1666,41
+Puducherry,1104,1722,42
+Puducherry,1118,1778,44
+Punjab,3849,8028,283
+Punjab,3821,8191,290
+Punjab,3851,8464,297
+Punjab,3909,8609,304
+Punjab,3937,8882,311
+Punjab,3985,9028,318
+Punjab,4015,9299,325
+Rajasthan,8943,24325,601
+Rajasthan,9142,24856,610
+Rajasthan,9275,25393,618
+Rajasthan,9310,25905,627
+Rajasthan,9421,26434,636
+Rajasthan,9608,26952,645
+Rajasthan,9724,27482,653
+Sikkim,341,123,0
+Sikkim,347,130,0
+Sikkim,353,132,0
+Sikkim,357,138,0
+Sikkim,360,140,0
+Sikkim,362,147,0
+Sikkim,363,149,0
+Tamil Nadu,53533,141667,3594
+Tamil Nadu,54089,146439,3713
+Tamil Nadu,54306,151222,4097
+Tamil Nadu,54783,155999,4237
+Tamil Nadu,55996,160756,4642
+Tamil Nadu,56664,165542,4803
+Tamil Nadu,57349,170293,5228
+Telangana,11224,40703,455
+Telangana,11499,42329,463
+Telangana,11691,43787,472
+Telangana,11954,45376,480
+Telangana,12092,46862,489
+Telangana,12184,48431,498
+Telangana,11996,49933,506
+Tripura,1657,2137,11
+Tripura,1648,2200,12
+Tripura,1674,2267,13
+Tripura,1670,2330,14
+Tripura,1715,2396,16
+Tripura,1766,2460,17
+Tripura,1809,2525,18
+Uttar Pradesh,21386,37664,1322
+Uttar Pradesh,22042,39552,1357
+Uttar Pradesh,22855,41490,1391
+Uttar Pradesh,23484,43534,1426
+Uttar Pradesh,24094,45465,1461
+Uttar Pradesh,24782,47401,1496
+Uttar Pradesh,25486,49343,1532
+Uttarakhand,1998,3458,61
+Uttarakhand,2004,3515,62
+Uttarakhand,2022,3574,64
+Uttarakhand,2031,3629,65
+Uttarakhand,2036,3687,66
+Uttarakhand,2059,3742,67
+Uttarakhand,2077,3799,69
+West Bengal,19244,33690,1286
+West Bengal,19856,35812,1319
+West Bengal,20551,37999,1351
+West Bengal,21307,40268,1385
+West Bengal,22005,42600,1417
+West Bengal,22723,45014,1452
+West Bengal,23352,47491,1485
