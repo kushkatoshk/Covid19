@@ -84,7 +84,8 @@ for select in statelist :
 
     selected_df = state_df[state_df['State']==select].reset_index(drop=True)
     last = selected_df.shape[0]-1
-    increase =  selected_df.at[last,'Total'] - selected_df.at[last-1,'Total']
+    last2 = selected_df.shape[0]-2
+    increase =  selected_df.at[last,'Total'] - selected_df.at[last2,'Total']
 
     sdf1 = selected_df[['Date','Active']]
     sdf1['Date'] = pd.to_datetime(sdf1['Date'], format='%d-%m-%Y')

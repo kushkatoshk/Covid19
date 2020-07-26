@@ -302,7 +302,9 @@ statelist = sorted(state_df['State'].unique().tolist())
 for select in statelist :
     selected_df = state_df[state_df['State']==select].reset_index(drop=True)
     last = selected_df.shape[0]-1
-    increase =  selected_df.at[last,'Total'] - selected_df.at[last-1,'Total']
+    last2 = selected_df.shape[0]-2
+    increase =  selected_df.at[last,'Total'] - selected_df.at[last2,'Total']
+    # print('pop',int(pop[pop['State']==select]['Population']))
     spop = int(pop[pop['State']==select]['Population'])
     total1 = (selected_df.at[last,'Total']/spop)*1000000
     active1 = (selected_df.at[last,'Active']/spop)*1000000

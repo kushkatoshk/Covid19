@@ -23,83 +23,93 @@ today = datetime.today().strftime("%d-%m-%Y")[:10]
 yest = (datetime.today() - timedelta(days=1)).strftime("%d-%m-%Y")[:10]
 
 dates = df['Date'].unique().tolist()
-# if today in dates :
-#
-# 	print("Already run")
-#
-# else :
+if today in dates :
 
-options = webdriver.ChromeOptions()
+	print("Already run")
 
-chromedriver = r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver"
-driver = webdriver.Chrome(r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver",options=options)
-os.environ["webdriver.chrome.driver"] = chromedriver
-driver.get("https://mohfw.gov.in/")
+else :
 
-html = driver.page_source
-soup = BeautifulSoup(html,'html.parser')
+    options = webdriver.ChromeOptions()
 
-print(today,yest)
-table = soup.select('table.table.table-striped')
+    chromedriver = r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver"
+    driver = webdriver.Chrome(r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver",options=options)
+    os.environ["webdriver.chrome.driver"] = chromedriver
+    driver.get("https://mohfw.gov.in/")
 
-tr = table[0].find_all('tr')
+    html = driver.page_source
+    soup = BeautifulSoup(html,'html.parser')
 
-state = []
-scases = []
-sfn = []
-scured = []
-sdeaths = []
-for t in tr[1:-5] :
-    ele = t.find_all('td')
-    if ele[1].get_text() == 'Dadra and Nagar Haveli and Daman and Diu' :
-    	state.append('Daman and Diu')
-    else :
-    	state.append(ele[1].get_text())
-    scases.append(ele[2].get_text())
-    scured.append(ele[3].get_text())
-    sdeaths.append(ele[4].get_text())
+    print(today,yest)
+    table = soup.select('table.table.table-striped')
 
-print(len(state))
-dfs = pd.DataFrame(columns = ['Date','State','Active','Cured','Deaths','Total'])
+    tr = table[0].find_all('tr')
 
-dfs['State'] = state
-dfs['Active'] = scases
-dfs['Cured'] = scured
-dfs['Deaths'] = sdeaths
-dfs['Date'] = today
-dfs['Total'] = 0
+    state = []
+    scases = []
+    sfn = []
+    scured = []
+    sdeaths = []
+    for t in tr[1:-6] :
+        ele = t.find_all('td')
+        if ele[1].get_text() == 'Dadra and Nagar Haveli and Daman and Diu' :
+        	state.append('Daman and Diu')
+        else :
+        	state.append(ele[1].get_text())
+        scases.append(ele[2].get_text())
+        scured.append(ele[3].get_text())
+        sdeaths.append(ele[4].get_text())
 
-df = df.append(dfs)
-df = df.reset_index(drop=True)
+    if 'West Bengal' not in state :
+        ele = tr[-5].find_all('td')
+        if ele[1].get_text() == 'Dadra and Nagar Haveli and Daman and Diu' :
+        	state.append('Daman and Diu')
+        else :
+        	state.append(ele[1].get_text())
+        scases.append(ele[2].get_text())
+        scured.append(ele[3].get_text())
+        sdeaths.append(ele[4].get_text())
 
-df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
+    print(len(state))
+    dfs = pd.DataFrame(columns = ['Date','State','Active','Cured','Deaths','Total'])
 
-df = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv")
+    dfs['State'] = state
+    dfs['Active'] = scases
+    dfs['Cured'] = scured
+    dfs['Deaths'] = sdeaths
+    dfs['Date'] = today
+    dfs['Total'] = 0
 
-df['Total'] = df['Active'] + df['Cured'] + df['Deaths']
+    df = df.append(dfs)
+    df = df.reset_index(drop=True)
 
-df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
+    df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
 
-	# df = pd.read_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv")
-	#
-	# div = soup.select('li.bg-blue')
-	# div1 = soup.select('li.bg-green')
-	# div2 = soup.select('li.bg-red')
-	# div3 = soup.select('li.bg-orange')
-	#
-	# cases = int(div[0].select('strong')[0].get_text())
-	# cured = int(div1[0].select('strong')[0].get_text())
-	# deaths = int(div2[0].select('strong')[0].get_text())
-	# migrated = int(div3[0].select('strong')[0].get_text())
-	#
-	# total = cases+cured+deaths+migrated
-	# increase = total - df[df['Date']==yest]['Total Cases'].values[0]
-	# df = df.append({'Date': today, 'Active Cases': cases, 'Cured / Discharged': cured, 'Deaths': deaths, 'Migrated': migrated, 'Total Cases': total, 'Increase in Active Cases': increase}, ignore_index=True)
-	# df = df[['Date','Active Cases','Cured / Discharged','Deaths','Migrated','Total Cases','Increase in Active Cases']]
-	#
-	#
-	# df.to_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv",index=False)
+    df = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv")
 
-print("Updated")
+    df['Total'] = df['Active'] + df['Cured'] + df['Deaths']
 
-driver.close()
+    df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
+
+    	# df = pd.read_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv")
+    	#
+    	# div = soup.select('li.bg-blue')
+    	# div1 = soup.select('li.bg-green')
+    	# div2 = soup.select('li.bg-red')
+    	# div3 = soup.select('li.bg-orange')
+    	#
+    	# cases = int(div[0].select('strong')[0].get_text())
+    	# cured = int(div1[0].select('strong')[0].get_text())
+    	# deaths = int(div2[0].select('strong')[0].get_text())
+    	# migrated = int(div3[0].select('strong')[0].get_text())
+    	#
+    	# total = cases+cured+deaths+migrated
+    	# increase = total - df[df['Date']==yest]['Total Cases'].values[0]
+    	# df = df.append({'Date': today, 'Active Cases': cases, 'Cured / Discharged': cured, 'Deaths': deaths, 'Migrated': migrated, 'Total Cases': total, 'Increase in Active Cases': increase}, ignore_index=True)
+    	# df = df[['Date','Active Cases','Cured / Discharged','Deaths','Migrated','Total Cases','Increase in Active Cases']]
+    	#
+    	#
+    	# df.to_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv",index=False)
+
+    print("Updated")
+
+    driver.close()
