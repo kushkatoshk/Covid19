@@ -23,62 +23,62 @@ today = datetime.today().strftime("%d-%m-%Y")[:10]
 yest = (datetime.today() - timedelta(days=1)).strftime("%d-%m-%Y")[:10]
 
 dates = df['Date'].unique().tolist()
-if today in dates :
+# if today in dates :
+#
+# 	print("Already run")
+#
+# else :
 
-	print("Already run")
+options = webdriver.ChromeOptions()
 
-else :
+chromedriver = r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver"
+driver = webdriver.Chrome(r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver",options=options)
+os.environ["webdriver.chrome.driver"] = chromedriver
+driver.get("https://mohfw.gov.in/")
 
-	options = webdriver.ChromeOptions()
+html = driver.page_source
+soup = BeautifulSoup(html,'html.parser')
 
-	chromedriver = r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver"
-	driver = webdriver.Chrome(r"C:\Users\Ankush Lakkanna\Downloads\chromedriver_win32\chromedriver",options=options)
-	os.environ["webdriver.chrome.driver"] = chromedriver
-	driver.get("https://mohfw.gov.in/")
+print(today,yest)
+table = soup.select('table.table.table-striped')
 
-	html = driver.page_source
-	soup = BeautifulSoup(html,'html.parser')
+tr = table[0].find_all('tr')
 
-	print(today,yest)
-	table = soup.select('table.table.table-striped')
+state = []
+scases = []
+sfn = []
+scured = []
+sdeaths = []
+for t in tr[1:-5] :
+    ele = t.find_all('td')
+    if ele[1].get_text() == 'Dadra and Nagar Haveli and Daman and Diu' :
+    	state.append('Daman and Diu')
+    else :
+    	state.append(ele[1].get_text())
+    scases.append(ele[2].get_text())
+    scured.append(ele[3].get_text())
+    sdeaths.append(ele[4].get_text())
 
-	tr = table[0].find_all('tr')
+print(len(state))
+dfs = pd.DataFrame(columns = ['Date','State','Active','Cured','Deaths','Total'])
 
-	state = []
-	scases = []
-	sfn = []
-	scured = []
-	sdeaths = []
-	for t in tr[1:-5] :
-	    ele = t.find_all('td')
-	    if ele[1].get_text() == 'Dadra and Nagar Haveli and Daman and Diu' :
-	    	state.append('Daman and Diu')
-	    else :
-	    	state.append(ele[1].get_text())
-	    scases.append(ele[2].get_text())
-	    scured.append(ele[3].get_text())
-	    sdeaths.append(ele[4].get_text())
+dfs['State'] = state
+dfs['Active'] = scases
+dfs['Cured'] = scured
+dfs['Deaths'] = sdeaths
+dfs['Date'] = today
+dfs['Total'] = 0
 
-	print(len(state))
-	dfs = pd.DataFrame(columns = ['Date','State','Active','Cured','Deaths','Total'])
+df = df.append(dfs)
+df = df.reset_index(drop=True)
 
-	dfs['State'] = state
-	dfs['Active'] = scases
-	dfs['Cured'] = scured
-	dfs['Deaths'] = sdeaths
-	dfs['Date'] = today
-	dfs['Total'] = 0
+df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
 
-	df = df.append(dfs)
-	df = df.reset_index(drop=True)
+df = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv")
 
-	df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
+df['Total'] = df['Active'] + df['Cured'] + df['Deaths']
 
-	df = pd.read_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv")
-
-	df['Total'] = df['Active'] + df['Cured'] + df['Deaths']
-
-	df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
+df.to_csv(r"C:\Users\Ankush Lakkanna\Covid19\state_data.csv",index=False)
 
 	# df = pd.read_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv")
 	#
@@ -100,6 +100,6 @@ else :
 	#
 	# df.to_csv(r"C:\Users\Ankush Lakkanna\india_corona_data1.csv",index=False)
 
-	print("Updated")
+print("Updated")
 
-	driver.close()
+driver.close()
