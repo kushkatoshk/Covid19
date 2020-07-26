@@ -553,3 +553,5 @@ for select in statelist :
         plt.text(0.05,0.90,txt1, transform=fig.transFigure, size=20, ha="left")
         pdf.savefig()
         plt.close()
+
+print('PDFs Generated!')

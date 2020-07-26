@@ -123,3 +123,5 @@ for select in statelist :
         preprocess = preprocess.append({'State':select, 'Active':sactivepred[i], 'Cured':scuredpred[i], 'Deaths' : sdeathspred[i]}, ignore_index=True)
 
 preprocess.to_csv('preprocess.csv', index=False)
+
+print('Preprocess Done!')

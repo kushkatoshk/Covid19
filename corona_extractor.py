@@ -53,8 +53,9 @@ if today in df['Date'].tolist() :
     df.at[ind,'Active Cases'] = cases
     df.at[ind,'Cured / Discharged'] = cured
     df.at[ind,'Deaths'] = deaths
+    df.at[ind,'Migrated'] = migrated
     total = cases+cured+deaths+migrated
-    df1['Total Cases'] = [total]
+    df.at[ind,'Total Cases'] = total
     increase = total - df[df['Date']==yest]['Total Cases'].values[0]
     df.at[ind,'Increase in Active Cases'] = increase
 else :
