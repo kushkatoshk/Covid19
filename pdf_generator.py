@@ -300,6 +300,7 @@ with PdfPages('India Report.pdf') as pdf:
 statelist = sorted(state_df['State'].unique().tolist())
 
 for select in statelist :
+    
     selected_df = state_df[state_df['State']==select].reset_index(drop=True)
     last = selected_df.shape[0]-1
     last2 = selected_df.shape[0]-2
